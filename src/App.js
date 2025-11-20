@@ -1,7 +1,16 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import Onboarding from './Onboarding';
 
-function App() {
+function Home() {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate('/onboarding');
+  };
+
   return (
     <div className="App">
       <nav className="App-nav">
@@ -14,9 +23,20 @@ function App() {
       <header className="App-header">
         <h1>Welcome to SmartLearn</h1>
         <p>Your AI-powered learning platform</p>
-        <button className="App-button">Get Started</button>
+        <button className="App-button" onClick={handleGetStarted}>Get Started</button>
       </header>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/onboarding" element={<Onboarding />} />
+      </Routes>
+    </Router>
   );
 }
 
