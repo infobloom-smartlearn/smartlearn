@@ -1,0 +1,33 @@
+/* Clean, friendly Step 1 of 3 onboarding styles */
+.onboard-step1 { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color: #111; background: #fafafa; min-height: 100vh; padding: 28px; box-sizing: border-box; }
+.onboard-header { display: flex; justify-content: space-between; align-items: center; gap: 16px; max-width: 1100px; margin: 0 auto 20px; }
+.logo { font-weight: 800; font-size: 20px; display: flex; gap: 4px; align-items: center; }
+.logo-purple { color: #6b46c1; }
+.logo-teal { color: #059669; }
+.progress-wrap { width: 320px; }
+.progress-label { font-size: 13px; color: #6b7280; margin-bottom: 6px; }
+.progress-bar { background: #e9e7ff; height: 8px; border-radius: 999px; overflow: hidden; }
+.progress-fill { background: #6b46c1; height: 100%; width: 33%; transition: width .25s ease; }
+
+.onboard-main { max-width: 1100px; margin: 20px auto; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; background: #fff; border-radius: 12px; padding: 36px; box-shadow: 0 8px 30px rgba(17,24,39,.06); }
+
+.left-illustration { display:flex; justify-content:center; align-items:center; }
+.badge-illustration { width: 330px; height: 330px; border-radius: 50%; overflow: hidden; display:flex; justify-content:center; align-items:center; background: linear-gradient(135deg,#fff9f2,#f2fbff); box-shadow: 0 10px 30px rgba(99,102,241,.12); }
+
+.right-form { padding: 8px 16px; }
+.right-form h1 { font-size: 28px; color: #0f172a; margin-bottom: 8px; }
+.right-form .subtext { color: #6b7280; margin-bottom: 18px; }
+
+.field { margin-bottom: 14px; display:block; }
+.label-text { font-size: 13px; margin-bottom: 8px; color: #374151; }
+.input { width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid #e6e7eb; background: #f7f7f9; box-sizing: border-box; font-size: 15px; }
+.select { width: 100%; padding: 11px 14px; border-radius: 8px; border: 1px solid #e6e7eb; background: #f7f7f9; font-size: 15px; }
+
+.segmented { display:flex; gap:8px; }
+.seg-btn { background: #f3f4f6; padding: 9px 12px; border-radius: 10px; border: 1px solid #e6e7eb; cursor: pointer; color: #374151; font-size: 14px; }
+.seg-btn.active { background: #6b46c1; color: white; border-color: #6b46c1; box-shadow: 0 6px 18px rgba(107,70,193,.14); }
+
+.actions { display:flex; justify-content:center; gap:12px; margin-top: 20px; }
+.btn { padding: 10px 18px; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; min-width: 120px; }
+.btn.secondary { background: #f8fafc; color: #9ca3af; border: 1px solid #f0f0f2; }
+.btn.primary { background: #6b46c1; color: white; box-shadow: 0 8px 24px rgba(107,70,193,.18); }

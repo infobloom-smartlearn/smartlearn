@@ -1,0 +1,74 @@
+/* Single-page role selection onboarding styles */
+:root{
+  --purple: #6b46c1;
+  --purple-600: #572aa4;
+  --teal: #059669;
+  --bg: #ffffff;
+  --muted: #9ca3af;
+}
+
+.onboarding-screen{
+  min-height: 100vh;
+  background: var(--bg);
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:flex-start;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #071124;
+}
+
+.onboarding-header{ display:flex; align-items:center; padding:28px 36px; }
+.logo{ display:flex; gap:6px; font-weight:800; font-size:20px; }
+.logo-purple{ color:var(--purple); }
+.logo-teal{ color:var(--teal); }
+
+.onboarding-body{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 20px; }
+.main-question{ font-size:32px; text-align:center; margin:12px 0 26px; font-weight:700; color:#0f172a; }
+
+.role-row{ display:flex; gap:36px; align-items:flex-start; justify-content:center; width:100%; max-width:960px; margin-bottom:36px; }
+.role-card{ display:flex; flex-direction:column; align-items:center; text-align:center; width:200px; }
+.role-inner{ background:transparent; border:0; padding:0; cursor:pointer; display:block; }
+
+.illustration-circle{ width:180px; height:180px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow: 0 8px 30px rgba(2,6,23,0.06); overflow:hidden; }
+.illustration-circle.white{ background: #ffffff; border: 1px solid #f3f4f6; padding:10px; box-sizing:border-box; }
+.illustration-circle.purple{ background: var(--purple); padding:6px; box-sizing:border-box; }
+.illustration-circle img.role-image{ width:86%; height:86%; object-fit:cover; display:block; border-radius:50%; transition: transform .18s ease; }
+.illustration-circle.white img.role-image{ width:86%; height:86%; object-fit:cover; border-radius:50%; }
+
+/* Make any active/hovered role show a purple inner circle by reducing image size so background shows */
+.role-card.active .illustration-circle{ background: var(--purple); }
+.role-card.active .illustration-circle img.role-image{ transform: scale(1.02); filter:brightness(.98); }
+.role-card.active .label-bar,
+.role-card.selected .label-bar{ background: var(--purple); }
+.role-card.active .label-bar span, .role-card.selected .label-bar span{ color: #fff; }
+
+/* Slight hover lift for cards */
+.role-card .role-inner:focus, .role-card .role-inner:hover{ outline: none; }
+.role-card.active{ transform: translateY(-6px); }
+.role-card{ transition: transform .16s ease; }
+
+.label-bar{ margin-top:12px; padding:8px 12px; width:100%; border-radius:8px; background: rgba(107,70,193,0.06); display:flex; align-items:center; justify-content:center; }
+.label-bar span{ font-weight:700; color:#111827; }
+.label-highlight{ background: rgba(107,70,193,0.20); color:white; }
+.role-card.student .label-bar span{ color:#ffffff; }
+
+.role-card.selected .illustration-circle{ transform: translateY(-6px); box-shadow:0 12px 34px rgba(6,8,23,0.18); }
+.role-card.student .illustration-circle{ border-radius:50%; }
+
+.continue-row{ width:100%; display:flex; justify-content:center; margin-top:18px; }
+.continue-btn{ background:var(--purple); color:white; border:0; padding:14px 36px; border-radius:12px; font-size:16px; font-weight:700; cursor:pointer; min-width:220px; box-shadow: 0 12px 36px rgba(107,70,193,0.16); }
+
+/* responsive */
+@media (max-width:900px){
+  .role-row{ gap:22px; max-width:720px; }
+  .role-card{ width:160px; }
+  .illustration-circle{ width:140px; height:140px; }
+  .main-question{ font-size:26px; }
+}
+
+@media (max-width:520px){
+  .role-row{ flex-direction:column; align-items:center; }
+  .role-card{ width:88%; max-width:420px; }
+  .illustration-circle{ width:200px; height:200px; }
+}
