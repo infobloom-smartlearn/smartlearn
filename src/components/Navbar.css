@@ -23,15 +23,15 @@
 }
 
 .navbar-logo h2 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: #1e293b;
+  font-family: 'DynaPuff', Inter, sans-serif;
+  font-weight: 400; /* user requested */
+  font-style: normal;
+  font-size: 40px; /* user requested */
+  line-height: 100%;
+  letter-spacing: 0%;
+  /* leading-trim not supported in browsers; using default line-height */
+  color: var(--role-dark);
   margin: 0;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .navbar-menu {

@@ -1,11 +1,11 @@
 /* Interactive Hero */
-:root{ --purple: #6b46c1; --teal: #059669; --muted: #6b7280; }
+:root{ --purple: #6b46c1; --teal: #059669; --muted: #6b7280; --role-dark: #AA33F0; --role-light: #CF7DEF; }
 
 .hero{ display:block; padding:48px 20px; background: linear-gradient(120deg, #fbfdff 0%, #fff 45%); }
 .hero-inner{ max-width:1180px; margin:0 auto; display:flex; gap:34px; align-items:center; justify-content:space-between; }
 
 .hero-left{ width:52%; padding:18px 6px; }
-.badge{ font-weight:800; color:var(--purple); display:inline-block; padding:6px 10px; border-radius:8px; background: rgba(107,70,193,0.06); }
+.badge{ font-family: 'DynaPuff', Inter, sans-serif; font-weight:400; font-style:normal; font-size:40px; line-height:100%; letter-spacing:0%; color:var(--role-dark); display:inline-block; padding:6px 10px; border-radius:8px; background: rgba(170,51,240,0.06); }
 
 .title{ font-size:42px; line-height:1.02; margin:18px 0 10px; color:#0f172a; }
 .subtitle{ font-size:16px; color:var(--muted); margin-bottom:18px; min-height:22px; }
@@ -21,7 +21,7 @@
 
 .persona-picker{ display:flex; gap:8px; margin-top:18px; }
 .persona-pill{ padding:8px 12px; border-radius:999px; background:rgba(17,24,39,0.03); color:#111827; border: 1px solid transparent; cursor:pointer; font-weight:600; transition: background .12s ease, transform .12s ease, border-color .12s ease; }
-.persona-pill.active{ background: linear-gradient(90deg, rgba(107,70,193,0.18), rgba(59,130,246,0.04)); border-color: rgba(107,70,193,0.14); color:var(--purple); transform: translateY(-3px); }
+.persona-pill.active{ background: linear-gradient(90deg,var(--role-dark),var(--role-light)); border-color: rgba(170,51,240,0.14); color: #fff; transform: translateY(-3px); }
 
 .hero-right{ width:44%; display:flex; align-items:center; justify-content:center; position:relative; }
 .illustration.large{ width:360px; height:360px; border-radius:20px; overflow:hidden; display:flex; align-items:center; justify-content:center; background: linear-gradient(180deg, rgba(107,70,193,0.06), rgba(5,150,105,0.02)); box-shadow: 0 18px 48px rgba(2,6,23,0.08); border-radius:20px; transition: transform .18s ease; }

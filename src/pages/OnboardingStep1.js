@@ -25,22 +25,8 @@ export default function OnboardingStep1() {
             <main className="onboard-main">
                 <div className="left-illustration" aria-hidden="true">
                     <div className="badge-illustration">
-                        {/* Decorative SVG-style illustration (placeholder) */}
-                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="g" x1="0" x2="1">
-                                    <stop offset="0" stopColor="#ffdede" />
-                                    <stop offset="1" stopColor="#fff0b2" />
-                                </linearGradient>
-                            </defs>
-                            <circle cx="100" cy="100" r="98" fill="url(#g)" />
-                            <g transform="translate(40,40)">
-                                <ellipse cx="60" cy="100" rx="62" ry="32" fill="#6EE7B7" opacity="0.2" />
-                                <circle cx="60" cy="60" r="38" fill="#fff" />
-                                <path d="M42 50 q18 -18 36 0" stroke="#6b46c1" strokeWidth="3" fill="none"/>
-                                <circle cx="60" cy="60" r="6" fill="#6b46c1"/>
-                            </g>
-                        </svg>
+                        {/* image from public folder */}
+                        <img src="/about1.png" alt="child exploring nature illustration" className="step1-illustration" />
                     </div>
                 </div>
 
