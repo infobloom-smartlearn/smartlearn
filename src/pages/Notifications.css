@@ -38,9 +38,15 @@
 }
 .logo-circle{ width:44px; height:44px; border-radius:10px; background:var(--purple-grad); display:flex; align-items:center; justify-content:center; color:#fff; }
 .logo-text{ font-family:var(--font-logo); font-size:22px; background:var(--purple-grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
-.nav-links{ display:flex; flex-direction:column; gap:8px; margin-top:12px; }
-.nav-link{ color:var(--muted); text-decoration:none; padding:8px; border-radius:8px; font-size:16px; }
-.nav-link.active{ background:var(--purple-grad); color:#fff; }
+.nav-links{ display:flex; flex-direction:column; gap:8px; margin-top:12px; padding-right:6px; }
+.nav-link{ display:flex; align-items:center; gap:10px; font-size:16px; color:var(--muted); text-decoration:none; padding:8px 10px; border-radius:8px; transition:background .12s ease, transform .12s ease; width:100%; }
+.nav-link:hover{ background:linear-gradient(90deg, rgba(170,51,240,0.06), rgba(207,125,239,0.06)); transform:translateX(2px); }
+.nav-link.active{ background:var(--purple-grad); color:#fff; box-shadow:0 8px 18px rgba(170,51,240,0.08); }
+.nav-link .nav-ico{ display:inline-block; width:22px; text-align:center; font-size:18px; }
+.nav-link .label{ font-weight:700; color:inherit; }
+
+/* reveal labels when the user hovers the sidebar on desktop devices */
+.notif-sidebar:hover .nav-link .label{ display:inline-block; }
 
 /* Main area */
 .notif-main{ flex:1; padding:26px 32px; display:flex; flex-direction:column; gap:18px; }
@@ -88,4 +94,8 @@
   .notif-main{ padding:18px; }
   .title-block h1{ font-size:22px; }
   .notif-card{ padding:14px; }
+  /* hide labels on small screens to keep icons compact */
+  .nav-link .label{ display:none; }
+
 }
+

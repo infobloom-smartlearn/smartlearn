@@ -16,18 +16,18 @@ export default function Dashboard() {
             <span className="logo-text">Smart Learn</span>
           </div>
           <nav className="nav-links">
-            <Link className="nav-link active" to="/"><span className="nav-ico">🏠</span>Home</Link>
-            <Link className="nav-link" to="#"><span className="nav-ico">📝</span>Quiz</Link>
-            <Link className="nav-link" to="/notifications"><span className="nav-ico">🔔</span>Notification</Link>
-            <Link className="nav-link" to="#"><span className="nav-ico">📚</span>Lessons</Link>
-            <Link className="nav-link" to="/profile"><span className="nav-ico">👤</span>Profile</Link>
-            <Link className="nav-link" to="#"><span className="nav-ico">🤖</span>AI Tutor</Link>
-            <Link className="nav-link" to="#"><span className="nav-ico">⚙️</span>Settings</Link>
+              <Link className="nav-link active" to="/"><span className="nav-ico">🏠</span><span className="label">Home</span></Link>
+              <Link className="nav-link" to="#"><span className="nav-ico">📝</span><span className="label">Quiz</span></Link>
+              <Link className="nav-link" to="/notifications"><span className="nav-ico">🔔</span><span className="label">Notifications</span></Link>
+              <Link className="nav-link" to="/app"><span className="nav-ico">📚</span><span className="label">Lessons</span></Link>
+              <Link className="nav-link" to="/profile"><span className="nav-ico">👤</span><span className="label">Profile</span></Link>
+              <Link className="nav-link" to="#"><span className="nav-ico">🤖</span><span className="label">AI Tutor</span></Link>
+              <Link className="nav-link" to="#"><span className="nav-ico">⚙️</span><span className="label">Settings</span></Link>
           </nav>
         </div>
         <div className="sidebar-bottom">
-          <a className="nav-link small" href="#"><span className="nav-ico">🎤</span>Voice Assistant</a>
-          <a className="nav-link small" href="#"><span className="nav-ico">📈</span>AI Insights</a>
+          <Link className="nav-link small" to="#"><span className="nav-ico">🎤</span><span className="label">Voice Assistant</span></Link>
+          <Link className="nav-link small" to="#"><span className="nav-ico">📈</span><span className="label">AI Insights</span></Link>
           <div className="ai-buddy-block">
             <div className="ai-buddy-title">AI Buddy</div>
             <div className="ai-buddy-desc">Ready to help you learn something new today!</div>
