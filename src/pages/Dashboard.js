@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Dashboard.css';
 
 export default function Dashboard() {
@@ -15,13 +16,13 @@ export default function Dashboard() {
             <span className="logo-text">Smart Learn</span>
           </div>
           <nav className="nav-links">
-            <a className="nav-link active" href="#"><span className="nav-ico">🏠</span>Home</a>
-            <a className="nav-link" href="#"><span className="nav-ico">📝</span>Quiz</a>
-            <a className="nav-link" href="#"><span className="nav-ico">🔔</span>Notification</a>
-            <a className="nav-link" href="#"><span className="nav-ico">📚</span>Lessons</a>
-            <a className="nav-link" href="#"><span className="nav-ico">👤</span>Profile</a>
-            <a className="nav-link" href="#"><span className="nav-ico">🤖</span>AI Tutor</a>
-            <a className="nav-link" href="#"><span className="nav-ico">⚙️</span>Settings</a>
+            <Link className="nav-link active" to="/"><span className="nav-ico">🏠</span>Home</Link>
+            <Link className="nav-link" to="#"><span className="nav-ico">📝</span>Quiz</Link>
+            <Link className="nav-link" to="/notifications"><span className="nav-ico">🔔</span>Notification</Link>
+            <Link className="nav-link" to="#"><span className="nav-ico">📚</span>Lessons</Link>
+            <Link className="nav-link" to="/profile"><span className="nav-ico">👤</span>Profile</Link>
+            <Link className="nav-link" to="#"><span className="nav-ico">🤖</span>AI Tutor</Link>
+            <Link className="nav-link" to="#"><span className="nav-ico">⚙️</span>Settings</Link>
           </nav>
         </div>
         <div className="sidebar-bottom">
@@ -43,8 +44,9 @@ export default function Dashboard() {
           </div>
           <div className="search-bar">
             <input type="text" placeholder="Search Courses..." />
-            <span className="search-bell">🔔</span>
+            <Link to="/notifications" className="search-bell">🔔</Link>
           </div>
+          <Link to="/profile" className="profile-area">👩‍🎓</Link>
         </header>
         {/* AI Insight Banner */}
         <section className="ai-banner">

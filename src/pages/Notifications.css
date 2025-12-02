@@ -1,0 +1,91 @@
+/* Notifications screen styles - mobile/tablet/desktop friendly */
+:root{
+  --purple: #AA33F0;
+  --purple-grad: linear-gradient(90deg,#AA33F0 0%,#CF7DEF 100%);
+  --bg: #fbf8ff;
+  --muted: #6c4bb6;
+  --card: #fff;
+  --shadow: 0 6px 20px rgba(29,10,57,0.06);
+  --green: #40c67f;
+  --orange: #ffb347;
+  --blue: #4da8ff;
+  --pink: #ef7d7d;
+  --font-logo: 'DynaPuff', cursive;
+}
+
+.notifications-root{
+  display:flex;
+  min-height:100vh;
+  background:var(--bg);
+  font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+/* Sidebar */
+.notif-sidebar{
+  width:240px;
+  background:#f5f1fb;
+  padding:28px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  box-shadow:var(--shadow);
+}
+.logo-block{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:12px;
+}
+.logo-circle{ width:44px; height:44px; border-radius:10px; background:var(--purple-grad); display:flex; align-items:center; justify-content:center; color:#fff; }
+.logo-text{ font-family:var(--font-logo); font-size:22px; background:var(--purple-grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links{ display:flex; flex-direction:column; gap:8px; margin-top:12px; }
+.nav-link{ color:var(--muted); text-decoration:none; padding:8px; border-radius:8px; font-size:16px; }
+.nav-link.active{ background:var(--purple-grad); color:#fff; }
+
+/* Main area */
+.notif-main{ flex:1; padding:26px 32px; display:flex; flex-direction:column; gap:18px; }
+.notif-header{ display:flex; align-items:center; justify-content:space-between; }
+.title-block h1{ font-size:28px; color:var(--purple); margin:0; }
+.title-block .muted{ color:var(--muted); margin:2px 0 0 0; }
+.profile-area{ width:44px; height:44px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow); font-size:20px; }
+
+.tabs{ display:flex; gap:10px; align-items:center; margin-top:6px; }
+.tab{ padding:8px 14px; border-radius:999px; border:1px solid transparent; background:transparent; color:var(--muted); cursor:pointer; font-weight:600; }
+.tab.active{ background:var(--purple); color:#fff; box-shadow:0 8px 20px rgba(170,51,240,0.12); }
+
+.notif-content{ margin-top:6px; }
+.list{ display:flex; flex-direction:column; gap:12px; }
+
+.notif-card{ display:flex; justify-content:space-between; gap:12px; padding:12px; background:var(--card); border-radius:12px; box-shadow:var(--shadow); align-items:flex-start; }
+.notif-card.unread{ border-left:4px solid var(--purple); }
+.left{ display:flex; gap:12px; align-items:flex-start; }
+.notif-icon{ width:48px; height:48px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; }
+.notif-icon.green{ background:linear-gradient(120deg,#c9f7e7,#40c67f); color:#fff; }
+.notif-icon.orange{ background:linear-gradient(120deg,#fff0db,#ffb347); }
+.notif-icon.blue{ background:linear-gradient(120deg,#e7f3ff,#4da8ff); color:#fff; }
+.notif-icon.purple{ background:linear-gradient(120deg,#f3e6ff,#aa33f0); color:#fff; }
+.notif-icon.pink{ background:linear-gradient(120deg,#ffe9e9,#ef7d7d); }
+
+.notif-title{ font-weight:700; color:var(--purple); font-size:16px; }
+.notif-text{ color:#5f4b7a; font-size:14px; margin-top:4px; }
+.right{ display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
+.tag{ padding:4px 8px; border-radius:999px; font-weight:700; font-size:12px; color:#fff; }
+.tag.green{ background:#40c67f; }
+.tag.orange{ background:#ffb347; }
+.tag.blue{ background:#4da8ff; }
+.tag.purple{ background:linear-gradient(90deg,#aa33f0,#cf7def); }
+.tag.pink{ background:#ef7d7d; }
+.time{ color:#8f6fb2; font-size:12px; }
+
+/* Empty/Unread state */
+.empty-state{ display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px; background:linear-gradient(180deg, #fff, #fbf8ff); border-radius:12px; box-shadow:var(--shadow); min-height:280px; }
+.empty-illustration{ font-size:64px; background:linear-gradient(90deg,#aa33f0,#ffc857); width:120px; height:120px; border-radius:28px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
+
+/* Responsive */
+@media (max-width:900px){
+  .notifications-root{ flex-direction:column; }
+  .notif-sidebar{ width:100%; display:flex; flex-direction:row; padding:12px; gap:6px; overflow:auto; }
+  .notif-main{ padding:18px; }
+  .title-block h1{ font-size:22px; }
+  .notif-card{ padding:14px; }
+}

@@ -9,6 +9,8 @@ import OnboardingStep3 from './pages/OnboardingStep3';
 import Hero from './components/Hero';
 import Features from './components/Features';
 import Dashboard from './pages/Dashboard';
+import Notifications from './pages/Notifications';
+import Profile from './pages/Profile';
 
 function Home() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route path="/onboarding/step-2" element={<OnboardingStep2 />} />
         <Route path="/onboarding/step-3" element={<OnboardingStep3 />} />
         <Route path="/app" element={<Dashboard />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/profile" element={<Profile />} />
         {/* add further steps like /onboarding/step-4 next */}
         {/* ...other routes... */}
       </Routes>
