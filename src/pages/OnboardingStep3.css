@@ -2,7 +2,7 @@
 
 .onboarding-step3-root{ min-height:100vh; background: #fbfdff; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial; color:#071124; padding:28px; box-sizing:border-box; }
 .step3-header{ display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; padding-bottom:8px; }
-.logo{ font-family: 'DynaPuff', Inter, sans-serif; font-weight:400; font-style:normal; font-size:40px; line-height:100%; letter-spacing:0%; leading-trim:none; color:var(--role-dark); }
+.logo{ font-family: 'DynaPuff', Inter, sans-serif; font-weight:400; font-style:normal; font-size:40px; line-height:100%; letter-spacing:0%; color:var(--role-dark); }
 .progress-note{ color:var(--muted); font-weight:600; }
 
 .progress-strip{ max-width:1200px; margin:14px auto; padding:6px 12px; }

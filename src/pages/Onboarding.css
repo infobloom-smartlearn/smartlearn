@@ -21,7 +21,7 @@
 }
 
 .onboarding-header{ display:flex; align-items:center; padding:28px 36px; }
-.logo{ display:flex; gap:6px; font-family: 'DynaPuff', Inter, sans-serif; font-weight:400; font-style:normal; font-size:40px; line-height:100%; letter-spacing:0%; leading-trim: none; }
+.logo{ display:flex; gap:6px; font-family: 'DynaPuff', Inter, sans-serif; font-weight:400; font-style:normal; font-size:40px; line-height:100%; letter-spacing:0%; }
 .logo-purple{ color:var(--role-dark); }
 .logo-teal{ color:var(--role-dark); }
 
