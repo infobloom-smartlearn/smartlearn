@@ -9,3 +9,5 @@ python-jose[cryptography]
 aioredis
 python-dotenv
 typing-extensions
+redis
+celery
