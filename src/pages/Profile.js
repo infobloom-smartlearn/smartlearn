@@ -29,7 +29,7 @@ export default function Profile(){
           <Link className="nav-item" to="/quiz">📝 <span className="label">Quiz</span></Link>
           <Link className="nav-item" to="/notifications">🔔 <span className="label">Notifications</span></Link>
           <Link className="nav-item active" to="/profile">👤 <span className="label">Profile</span></Link>
-          <Link className="nav-item" to="#">🤖 <span className="label">AI Tutor</span></Link>
+          <Link className="nav-item" to="/ai-tutor">🤖 <span className="label">AI Tutor</span></Link>
           <Link className="nav-item" to="#">🎮 <span className="label">Games</span></Link>
           <Link className="nav-item" to="/settings">⚙️ <span className="label">Settings</span></Link>
         </nav>

@@ -132,8 +132,8 @@
 }
 .dashboard-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 24px;
 }
 .greeting h1 {
   font-size: 32px;
@@ -149,20 +149,41 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: 1 1 480px;
 }
 .search-bar input {
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: 1px solid #e0d6f7;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid #e6e0f8;
   font-size: 16px;
   background: #fff;
-  width: 220px;
+  width: 100%;
 }
 .search-bell {
   font-size: 22px;
   color: var(--accent-purple);
   cursor: pointer;
 }
+
+/* profile icon styling to keep it close to bell */
+.profile-area{
+  margin-left: 8px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+  font-size:20px;
+  color: var(--accent-purple);
+  text-decoration: none;
+}
+
+/* make the right cluster (bell + profile) appear compact */
+.search-bar .search-bell{ margin-right:6px }
+.header-right{ display:flex; align-items:center; gap:6px }
 .ai-banner {
   background: var(--purple-gradient);
   border-radius: 16px;

@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: smartlearn
+      POSTGRES_PASSWORD: smartpwd
+      POSTGRES_DB: smartlearn
+    ports: ["5432:5432"]
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    ports: ["6379:6379"]
+
+  backend:
+    build: .
+    command: uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./:/app
+    environment:
+      DATABASE_URL: postgresql+asyncpg://smartlearn:smartpwd@db:5432/smartlearn
+      REDIS_URL: redis://redis:6379/0
+    ports: ["8000:8000"]
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  db-data:

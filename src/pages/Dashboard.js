@@ -21,7 +21,7 @@ export default function Dashboard() {
               <Link className="nav-link" to="/notifications"><span className="nav-ico">🔔</span><span className="label">Notifications</span></Link>
               <Link className="nav-link" to="/lessons"><span className="nav-ico">📚</span><span className="label">Lessons</span></Link>
               <Link className="nav-link" to="/profile"><span className="nav-ico">👤</span><span className="label">Profile</span></Link>
-              <Link className="nav-link" to="#"><span className="nav-ico">🤖</span><span className="label">AI Tutor</span></Link>
+              <Link className="nav-link" to="/ai-tutor"><span className="nav-ico">🤖</span><span className="label">AI Tutor</span></Link>
               <Link className="nav-link" to="/settings"><span className="nav-ico">⚙️</span><span className="label">Settings</span></Link>
           </nav>
         </div>
@@ -31,7 +31,7 @@ export default function Dashboard() {
           <div className="ai-buddy-block">
             <div className="ai-buddy-title">AI Buddy</div>
             <div className="ai-buddy-desc">Ready to help you learn something new today!</div>
-            <button className="ai-buddy-chat">Chat</button>
+            <Link className="ai-buddy-chat" to="/ai-tutor">Chat</Link>
           </div>
         </div>
       </aside>

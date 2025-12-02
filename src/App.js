@@ -14,6 +14,7 @@ import Quiz from './pages/Quiz';
 import Settings from './pages/Settings';
 import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
+import AiTutor from './pages/AiTutor';
 
 function Home() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/ai-tutor" element={<AiTutor />} />
         {/* add further steps like /onboarding/step-4 next */}
         {/* ...other routes... */}
       </Routes>
