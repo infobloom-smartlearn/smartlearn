@@ -22,16 +22,16 @@ export default function Profile(){
     <div className="profile-root">
       <aside className="profile-nav">
         <div className="nav-top">
-          <div className="logo">💡<span className="logo-text">Smart Learn</span></div>
+          <div className="logo">💡<span className="logo-text">SmartLearn</span></div>
         </div>
         <nav className="nav-items">
-          <Link className="nav-item" to="/">🏠 <span className="label">Home</span></Link>
-          <Link className="nav-item" to="#">📝 <span className="label">Quiz</span></Link>
+          <Link className="nav-item" to="/app">🏠 <span className="label">Home</span></Link>
+          <Link className="nav-item" to="/quiz">📝 <span className="label">Quiz</span></Link>
           <Link className="nav-item" to="/notifications">🔔 <span className="label">Notifications</span></Link>
           <Link className="nav-item active" to="/profile">👤 <span className="label">Profile</span></Link>
           <Link className="nav-item" to="#">🤖 <span className="label">AI Tutor</span></Link>
           <Link className="nav-item" to="#">🎮 <span className="label">Games</span></Link>
-          <Link className="nav-item" to="#">⚙️ <span className="label">Settings</span></Link>
+          <Link className="nav-item" to="/settings">⚙️ <span className="label">Settings</span></Link>
         </nav>
       </aside>
 

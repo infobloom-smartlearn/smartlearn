@@ -78,18 +78,18 @@ export default function Notifications(){
       <aside className="notif-sidebar">
         <div className="logo-block">
           <div className="logo-circle">💡</div>
-          <div className="logo-text">Smart Learn</div>
+          <div className="logo-text">SmartLearn</div>
         </div>
 
         <nav className="nav-links">
-          <Link className="nav-link" to="/"><span className="nav-ico">🏠</span><span className="label">Home</span></Link>
-          <Link className="nav-link" to="/onboarding"><span className="nav-ico">📝</span><span className="label">Quiz</span></Link>
+          <Link className="nav-link" to="/app"><span className="nav-ico">🏠</span><span className="label">Home</span></Link>
+          <Link className="nav-link" to="/quiz"><span className="nav-ico">📝</span><span className="label">Quiz</span></Link>
           <Link className="nav-link active" to="/notifications"><span className="nav-ico">🔔</span><span className="label">Notifications</span></Link>
           <Link className="nav-link" to="/app"><span className="nav-ico">📚</span><span className="label">Lessons</span></Link>
           <Link className="nav-link" to="/profile"><span className="nav-ico">👤</span><span className="label">Profile</span></Link>
           <Link className="nav-link" to="/app"><span className="nav-ico">🤖</span><span className="label">AI Tutor</span></Link>
           <Link className="nav-link" to="#"><span className="nav-ico">🎮</span><span className="label">Games</span></Link>
-          <Link className="nav-link" to="#"><span className="nav-ico">⚙️</span><span className="label">Settings</span></Link>
+          <Link className="nav-link" to="/settings"><span className="nav-ico">⚙️</span><span className="label">Settings</span></Link>
         </nav>
 
       </aside>

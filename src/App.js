@@ -10,6 +10,8 @@ import Hero from './components/Hero';
 import Features from './components/Features';
 import Dashboard from './pages/Dashboard';
 import Lessons from './pages/Lessons';
+import Quiz from './pages/Quiz';
+import Settings from './pages/Settings';
 import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
 
@@ -34,6 +36,8 @@ function App() {
         <Route path="/onboarding/step-3" element={<OnboardingStep3 />} />
         <Route path="/app" element={<Dashboard />} />
         <Route path="/lessons" element={<Lessons />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/profile" element={<Profile />} />
         {/* add further steps like /onboarding/step-4 next */}

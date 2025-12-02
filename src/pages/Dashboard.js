@@ -13,16 +13,16 @@ export default function Dashboard() {
               {/* Replace with SVG icon if available */}
               <span className="logo-icon">💡</span>
             </div>
-            <span className="logo-text">Smart Learn</span>
+            <span className="logo-text">SmartLearn</span>
           </div>
           <nav className="nav-links">
-              <Link className="nav-link active" to="/"><span className="nav-ico">🏠</span><span className="label">Home</span></Link>
-              <Link className="nav-link" to="#"><span className="nav-ico">📝</span><span className="label">Quiz</span></Link>
+              <Link className="nav-link active" to="/app"><span className="nav-ico">🏠</span><span className="label">Home</span></Link>
+              <Link className="nav-link" to="/quiz"><span className="nav-ico">📝</span><span className="label">Quiz</span></Link>
               <Link className="nav-link" to="/notifications"><span className="nav-ico">🔔</span><span className="label">Notifications</span></Link>
               <Link className="nav-link" to="/lessons"><span className="nav-ico">📚</span><span className="label">Lessons</span></Link>
               <Link className="nav-link" to="/profile"><span className="nav-ico">👤</span><span className="label">Profile</span></Link>
               <Link className="nav-link" to="#"><span className="nav-ico">🤖</span><span className="label">AI Tutor</span></Link>
-              <Link className="nav-link" to="#"><span className="nav-ico">⚙️</span><span className="label">Settings</span></Link>
+              <Link className="nav-link" to="/settings"><span className="nav-ico">⚙️</span><span className="label">Settings</span></Link>
           </nav>
         </div>
         <div className="sidebar-bottom">
