@@ -1,12 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './OnboardingStep1.css';
+
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
 
 export default function OnboardingStep1() {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [ageRange, setAgeRange] = useState('9-11'); // default selected
     const [grade, setGrade] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    // Load saved step-1 data on mount
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                const token = localStorage.getItem('access_token');
+                if (!token) {
+                    setLoading(false);
+                    return;
+                }
+                const response = await fetch(`${API_URL}/onboarding/me/info`, {
+                    headers: { 'Authorization': `Bearer ${token}` },
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setName(data.name || '');
+                    setAgeRange(data.ageRange || '9-11');
+                    setGrade(data.grade || '');
+                }
+            } catch (err) {
+                console.error('Error loading step-1 data:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        loadData();
+    }, []);
+
+    // Save step-1 data and navigate to step-2
+    const handleContinue = async () => {
+        try {
+            const token = localStorage.getItem('access_token');
+            if (!token) {
+                setError('Not authenticated. Please log in.');
+                return;
+            }
+            const response = await fetch(`${API_URL}/onboarding/me/info`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, ageRange, grade: grade || null }),
+            });
+            if (response.ok) {
+                navigate('/onboarding/step-2');
+            } else {
+                setError('Failed to save step-1 data.');
+            }
+        } catch (err) {
+            console.error('Error saving step-1 data:', err);
+            setError('An error occurred.');
+        }
+    };
 
     return (
         <div className="onboard-step1">
@@ -88,14 +146,17 @@ export default function OnboardingStep1() {
                         </select>
                     </label>
 
+                    {error && <div className="error-message" style={{color: 'red', marginBottom: '1rem'}}>{error}</div>}
+
                     <div className="actions">
                         <button className="btn secondary" onClick={() => navigate('/onboarding')}>Back</button>
                         <button
                             className="btn primary"
-                            onClick={() => navigate('/onboarding/step-2')}
-                            aria-disabled={!name}
+                            onClick={handleContinue}
+                            disabled={!name || loading}
+                            aria-disabled={!name || loading}
                         >
-                            Continue
+                            {loading ? 'Loading...' : 'Continue'}
                         </button>
                     </div>
                 </div>

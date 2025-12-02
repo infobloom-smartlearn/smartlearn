@@ -193,3 +193,33 @@ class OnboardingRolesUpdate(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+# Onboarding step 1 (basic profile info)
+class OnboardingInfoCreate(BaseModel):
+    name: str
+    ageRange: str
+    grade: Optional[str] = None
+
+
+class OnboardingInfoRead(BaseModel):
+    name: str
+    ageRange: str
+    grade: Optional[str] = None
+
+    class Config:
+        orm_mode = True
+
+
+# Onboarding step 2 (subjects & learning styles)
+class OnboardingStep2Create(BaseModel):
+    subjects: dict[str, bool]
+    styles: dict[str, bool]
+
+
+class OnboardingStep2Read(BaseModel):
+    subjects: dict[str, bool]
+    styles: dict[str, bool]
+
+    class Config:
+        orm_mode = True
