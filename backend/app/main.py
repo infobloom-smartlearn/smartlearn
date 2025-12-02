@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.app.routers import ai_tutor, auth, users, courses, lessons, quizzes, progress, notifications, settings, onboarding
+from backend.app.routers import ai_tutor, auth, users, courses, lessons, quizzes, progress, notifications, settings, onboarding, dashboard
 from backend.app.core.config import settings
 
 app = FastAPI(title="SmartLearn API")
@@ -23,6 +23,7 @@ app.include_router(notifications.router, prefix="/api/notifications", tags=["not
 app.include_router(ai_tutor.router, prefix="/api/ai", tags=["ai"])
 app.include_router(settings.router, prefix="/api/settings", tags=["settings"])
 app.include_router(onboarding.router, prefix="/api/onboarding", tags=["onboarding"])
+app.include_router(dashboard.router, prefix="/api/dashboard", tags=["dashboard"])
 
 
 @app.get("/api/health")

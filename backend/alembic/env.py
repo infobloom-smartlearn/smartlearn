@@ -5,12 +5,15 @@ from sqlalchemy import pool
 from alembic import context
 import os
 import sys
+from dotenv import load_dotenv
+
+# Load .env file
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env"))
 
 # Add parent directory to path so we can import app modules
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from app.db.base import Base
-from app.core.config import settings
 
 # this is the Alembic Config object
 config = context.config
@@ -19,8 +22,12 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Set the sqlalchemy.url from environment
-config.set_main_option("sqlalchemy.url", settings.database_url)
+# Get database URL from environment and convert async to sync for migrations
+database_url = os.getenv("DATABASE_URL", "")
+if database_url:
+    # Convert asyncpg to psycopg2 for synchronous migrations
+    database_url = database_url.replace("postgresql+asyncpg://", "postgresql://")
+    config.set_main_option("sqlalchemy.url", database_url)
 
 # Model's MetaData object for 'autogenerate' support
 target_metadata = Base.metadata
