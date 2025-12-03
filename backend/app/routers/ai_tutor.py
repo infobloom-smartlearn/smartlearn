@@ -28,9 +28,9 @@ Dependencies:
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List, Optional
 from uuid import UUID
-from backend.app import schemas, models
-from backend.app.db.session import get_db
-from backend.app.core.deps import get_current_user
+from .. import schemas, models
+from ..db.session import get_db
+from ..core.deps import get_current_user
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from datetime import datetime
@@ -80,7 +80,7 @@ async def create_conversation(
     conv = models.Conversation(
         user_id=user.id,
         title=payload.title,
-        metadata=payload.metadata
+        conversation_metadata=payload.conversation_metadata
     )
     
     # Add to session

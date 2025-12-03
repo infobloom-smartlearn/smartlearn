@@ -9,6 +9,10 @@ const Navbar = () => {
     navigate('/onboarding');
   };
 
+  const handleSignIn = () => {
+    navigate('/signin');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -21,7 +25,7 @@ const Navbar = () => {
           <li className="navbar-item">Contact</li>
         </ul>
         <div className="navbar-actions">
-          <button className="navbar-btn">Sign In</button>
+          <button className="navbar-btn" onClick={handleSignIn}>Sign In</button>
           <button
             className="navbar-btn primary"
             onClick={handleGetStarted}

@@ -19,9 +19,9 @@ Dependencies:
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, and_
-from backend.app.db.session import get_db
-from backend.app import schemas, models
-from backend.app.core.deps import get_current_user
+from ..db.session import get_db
+from .. import schemas, models
+from ..core.deps import get_current_user
 from typing import List, Optional
 
 router = APIRouter()
@@ -65,11 +65,11 @@ async def list_quizzes(
     
     # Add subject filter if provided
     if subject:
-        filters.append(models.Quiz.metadata["subject"].astext == subject)
+        filters.append(models.Quiz.quiz_metadata["subject"].astext == subject)
     
     # Add difficulty filter if provided
     if difficulty:
-        filters.append(models.Quiz.metadata["difficulty"].astext == difficulty)
+        filters.append(models.Quiz.quiz_metadata["difficulty"].astext == difficulty)
     
     # Apply filters to query
     if filters:

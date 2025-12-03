@@ -35,9 +35,9 @@ Dependencies:
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from backend.app.db.session import get_db
-from backend.app import schemas, models
-from backend.app.core.deps import get_current_user
+from ..db.session import get_db
+from .. import schemas, models
+from ..core.deps import get_current_user
 
 router = APIRouter()
 

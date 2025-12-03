@@ -26,9 +26,9 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
 from datetime import datetime, timedelta
-from backend.app.db.session import get_db
-from backend.app import models
-from backend.app.core.deps import get_current_user
+from ..db.session import get_db
+from .. import models
+from ..core.deps import get_current_user
 from pydantic import BaseModel
 from typing import Optional
 

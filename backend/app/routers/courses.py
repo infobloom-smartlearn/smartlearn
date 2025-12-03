@@ -21,9 +21,9 @@ Dependencies:
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from backend.app.db.session import get_db
-from backend.app import schemas, models
-from backend.app.core.deps import get_current_user
+from ..db.session import get_db
+from .. import schemas, models
+from ..core.deps import get_current_user
 from typing import List
 
 router = APIRouter()
@@ -249,7 +249,7 @@ async def create_course(
         title=payload.title,
         description=payload.description,
         slug=payload.slug,
-        metadata=payload.metadata,
+        course_metadata=payload.course_metadata,
         is_published=payload.is_published,
         created_by=current_user.id
     )

@@ -31,7 +31,7 @@ class UserUpdate(BaseModel):
 
 class ConversationCreate(BaseModel):
     title: Optional[str] = None
-    metadata: Optional[dict] = {}
+    conversation_metadata: Optional[dict] = {}
 
 
 class ConversationRead(BaseModel):
@@ -78,7 +78,7 @@ class CourseRead(BaseModel):
     title: str
     description: Optional[str]
     slug: str
-    metadata: Optional[dict]
+    course_metadata: Optional[dict]
     is_published: bool
 
     class Config:

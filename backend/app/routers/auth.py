@@ -28,11 +28,11 @@ Dependencies:
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from backend.app.db.session import get_db
-from backend.app import schemas, models
-from backend.app.core import security
-from backend.app.core.config import settings
-from backend.app.core.deps import get_current_user
+from ..db.session import get_db
+from .. import schemas, models
+from ..core import security
+from ..core.config import settings
+from ..core.deps import get_current_user
 from datetime import timedelta
 from pydantic import EmailStr
 from fastapi.security import OAuth2PasswordRequestForm

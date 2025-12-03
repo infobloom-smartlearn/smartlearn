@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.app.routers import ai_tutor, auth, users, courses, lessons, quizzes, progress, notifications, settings, onboarding, dashboard
-from backend.app.core.config import settings
+from .routers import ai_tutor, auth, users, courses, lessons, quizzes, progress, notifications, settings, onboarding, dashboard
+from .core.config import settings as app_settings
 
 app = FastAPI(title="SmartLearn API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
+    allow_origins=app_settings.CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

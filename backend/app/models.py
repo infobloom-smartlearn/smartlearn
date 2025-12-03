@@ -15,7 +15,7 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
-from backend.app.db.base import Base
+from .db.base import Base
 
 
 class MessageRole(str, enum.Enum):
@@ -75,7 +75,7 @@ class Course(Base):
     title = Column(String, nullable=False)
     description = Column(Text, nullable=True)
     slug = Column(String, nullable=False, unique=True)
-    metadata = Column(JSON, default={})
+    course_metadata = Column(JSON, default={})
     created_by = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True)
     is_published = Column(Boolean, default=False)
 
@@ -90,6 +90,7 @@ class Lesson(Base):
     content = Column(Text, nullable=True)
     order = Column(Integer, nullable=True)
     duration_minutes = Column(Integer, nullable=True)
+    lesson_metadata = Column(JSON, default={})
 
     course = relationship("Course", back_populates="lessons")
 
@@ -100,6 +101,7 @@ class Quiz(Base):
     lesson_id = Column(UUID(as_uuid=True), ForeignKey("lessons.id", ondelete="CASCADE"), nullable=False)
     title = Column(String, nullable=False)
     passing_score = Column(Integer, nullable=True)
+    quiz_metadata = Column(JSON, default={})
 
     questions = relationship("QuizQuestion", back_populates="quiz")
 
@@ -153,7 +155,7 @@ class Conversation(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     title = Column(String, nullable=True)
-    metadata = Column(JSON, default={})
+    conversation_metadata = Column(JSON, default={})
     last_message_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user = relationship("User", back_populates="conversations")

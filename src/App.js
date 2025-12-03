@@ -15,6 +15,8 @@ import Settings from './pages/Settings';
 import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
 import AiTutor from './pages/AiTutor';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 function Home() {
   return (
@@ -31,11 +33,14 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/onboarding/step-1" element={<OnboardingStep1 />} />
         <Route path="/onboarding/step-2" element={<OnboardingStep2 />} />
         <Route path="/onboarding/step-3" element={<OnboardingStep3 />} />
         <Route path="/app" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/lessons" element={<Lessons />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/settings" element={<Settings />} />

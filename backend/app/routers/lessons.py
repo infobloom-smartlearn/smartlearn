@@ -15,12 +15,12 @@ Dependencies:
 - Authentication (get_current_user) for some endpoints
 """
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, and_
-from backend.app.db.session import get_db
-from backend.app import schemas, models
-from backend.app.core.deps import get_current_user
+from ..db.session import get_db
+from .. import schemas, models
+from ..core.deps import get_current_user
 from typing import List, Optional
 
 router = APIRouter()
@@ -65,15 +65,15 @@ async def list_lessons(
     
     # Add subject filter if provided
     if subject:
-        filters.append(models.Lesson.metadata["subject"].astext == subject)
+        filters.append(models.Lesson.lesson_metadata["subject"].astext == subject)
     
     # Add topic filter if provided
     if topic:
-        filters.append(models.Lesson.metadata["topic"].astext == topic)
+        filters.append(models.Lesson.lesson_metadata["topic"].astext == topic)
     
     # Add difficulty filter if provided
     if difficulty:
-        filters.append(models.Lesson.metadata["difficulty"].astext == difficulty)
+        filters.append(models.Lesson.lesson_metadata["difficulty"].astext == difficulty)
     
     # Apply all metadata filters to query using AND logic
     # (lesson must match all specified filters)
