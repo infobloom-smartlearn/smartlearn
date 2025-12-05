@@ -1,5 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { 
+  FaLightbulb, 
+  FaHome, 
+  FaEdit, 
+  FaBell, 
+  FaBook, 
+  FaUser, 
+  FaRobot, 
+  FaCog,
+  FaMicrophone,
+  FaChartLine,
+  FaBrain,
+  FaCircle,
+  FaFire,
+  FaPalette,
+  FaLandmark,
+  FaPaintBrush
+} from 'react-icons/fa';
+import { HiAcademicCap } from 'react-icons/hi';
 import './Dashboard.css';
 
 export default function Dashboard() {
@@ -11,23 +30,23 @@ export default function Dashboard() {
           <div className="logo-block">
             <div className="logo-circle">
               {/* Replace with SVG icon if available */}
-              <span className="logo-icon">💡</span>
+              <FaLightbulb className="logo-icon" />
             </div>
             <span className="logo-text">SmartLearn</span>
           </div>
           <nav className="nav-links">
-              <Link className="nav-link active" to="/app"><span className="nav-ico">🏠</span><span className="label">Home</span></Link>
-              <Link className="nav-link" to="/quiz"><span className="nav-ico">📝</span><span className="label">Quiz</span></Link>
-              <Link className="nav-link" to="/notifications"><span className="nav-ico">🔔</span><span className="label">Notifications</span></Link>
-              <Link className="nav-link" to="/lessons"><span className="nav-ico">📚</span><span className="label">Lessons</span></Link>
-              <Link className="nav-link" to="/profile"><span className="nav-ico">👤</span><span className="label">Profile</span></Link>
-              <Link className="nav-link" to="/ai-tutor"><span className="nav-ico">🤖</span><span className="label">AI Tutor</span></Link>
-              <Link className="nav-link" to="/settings"><span className="nav-ico">⚙️</span><span className="label">Settings</span></Link>
+              <Link className="nav-link active" to="/app"><FaHome className="nav-ico" /><span className="label">Home</span></Link>
+              <Link className="nav-link" to="/quiz"><FaEdit className="nav-ico" /><span className="label">Quiz</span></Link>
+              <Link className="nav-link" to="/notifications"><FaBell className="nav-ico" /><span className="label">Notifications</span></Link>
+              <Link className="nav-link" to="/lessons"><FaBook className="nav-ico" /><span className="label">Lessons</span></Link>
+              <Link className="nav-link" to="/profile"><FaUser className="nav-ico" /><span className="label">Profile</span></Link>
+              <Link className="nav-link" to="/ai-tutor"><FaRobot className="nav-ico" /><span className="label">AI Tutor</span></Link>
+              <Link className="nav-link" to="/settings"><FaCog className="nav-ico" /><span className="label">Settings</span></Link>
           </nav>
         </div>
         <div className="sidebar-bottom">
-          <Link className="nav-link small" to="#"><span className="nav-ico">🎤</span><span className="label">Voice Assistant</span></Link>
-          <Link className="nav-link small" to="#"><span className="nav-ico">📈</span><span className="label">AI Insights</span></Link>
+          <Link className="nav-link small" to="#"><FaMicrophone className="nav-ico" /><span className="label">Voice Assistant</span></Link>
+          <Link className="nav-link small" to="#"><FaChartLine className="nav-ico" /><span className="label">AI Insights</span></Link>
           <div className="ai-buddy-block">
             <div className="ai-buddy-title">AI Buddy</div>
             <div className="ai-buddy-desc">Ready to help you learn something new today!</div>
@@ -44,9 +63,9 @@ export default function Dashboard() {
           </div>
           <div className="search-bar">
             <input type="text" placeholder="Search Courses..." />
-            <Link to="/notifications" className="search-bell">🔔</Link>
+            <Link to="/notifications" className="search-bell"><FaBell /></Link>
           </div>
-          <Link to="/profile" className="profile-area">👩‍🎓</Link>
+          <Link to="/profile" className="profile-area"><HiAcademicCap /></Link>
         </header>
         {/* AI Insight Banner */}
         <section className="ai-banner">
@@ -56,7 +75,7 @@ export default function Dashboard() {
               <p>Based on your progress, I recommend trying advanced geometry next.</p>
               <button className="ai-banner-btn">View Recommendations</button>
             </div>
-            <div className="ai-banner-icon">🧠</div>
+            <div className="ai-banner-icon"><FaBrain /></div>
           </div>
         </section>
         {/* Continue Learning Section */}
@@ -67,19 +86,19 @@ export default function Dashboard() {
           </div>
           <div className="course-cards">
             <div className="course-card math">
-              <div className="course-icon">🔵</div>
+              <FaCircle className="course-icon" style={{ color: '#3b82f6' }} />
               <div className="course-title">Algebra basics</div>
               <div className="course-progress"><div className="progress-bar purple" style={{width:'75%'}}></div></div>
               <button className="course-btn">Continue</button>
             </div>
             <div className="course-card science">
-              <div className="course-icon">🟢</div>
+              <FaCircle className="course-icon" style={{ color: '#10b981' }} />
               <div className="course-title">Plant biology</div>
               <div className="course-progress"><div className="progress-bar green" style={{width:'85%'}}></div></div>
               <button className="course-btn">Continue</button>
             </div>
             <div className="course-card english">
-              <div className="course-icon">🟠</div>
+              <FaCircle className="course-icon" style={{ color: '#f59e0b' }} />
               <div className="course-title">Metaphors</div>
               <div className="course-progress"><div className="progress-bar red" style={{width:'77%'}}></div></div>
               <button className="course-btn">Continue</button>
@@ -91,17 +110,17 @@ export default function Dashboard() {
           <h3>AI recommended</h3>
           <div className="ai-cards">
             <div className="ai-card art">
-              <div className="ai-card-illustration">🎨</div>
+              <FaPalette className="ai-card-illustration" />
               <div className="ai-card-title">Art</div>
               <button className="ai-card-btn">Learn</button>
             </div>
             <div className="ai-card architecture">
-              <div className="ai-card-illustration">🏛️</div>
+              <FaLandmark className="ai-card-illustration" />
               <div className="ai-card-title">Architecture</div>
               <button className="ai-card-btn">Learn</button>
             </div>
             <div className="ai-card design">
-              <div className="ai-card-illustration">🖌️</div>
+              <FaPaintBrush className="ai-card-illustration" />
               <div className="ai-card-title">Design</div>
               <button className="ai-card-btn">Learn</button>
             </div>
@@ -111,7 +130,7 @@ export default function Dashboard() {
         <section className="streak-section">
           <div className="streak-header">
             <span className="streak-title">Learning Streak</span>
-            <span className="streak-flame">🔥</span>
+            <FaFire className="streak-flame" />
           </div>
           <div className="streak-days">4 days in a row.</div>
           <div className="streak-circles">

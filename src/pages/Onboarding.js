@@ -9,8 +9,23 @@ export default function Onboarding() {
     const [hoveredRole, setHoveredRole] = useState(null);
 
     function handleContinue() {
-        if (role === 'student') navigate('/onboarding/step-1');
-        else navigate('/onboarding/details');
+        // Persist selected role so the rest of the app (including teacher dashboard guards)
+        // can recognize this user as a teacher/parent/student.
+        try {
+            window.localStorage.setItem('userType', role);
+        } catch (e) {
+            // ignore storage errors (e.g., private mode)
+        }
+
+        if (role === 'teacher') {
+            navigate('/teacher');
+        } else if (role === 'student') {
+            navigate('/onboarding/step-1');
+        } else if (role === 'parent') {
+            navigate('/parent');
+        } else {
+            navigate('/onboarding/details');
+        }
     }
 
     return (

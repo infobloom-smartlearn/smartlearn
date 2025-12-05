@@ -27,8 +27,28 @@ from ..db.session import get_db
 from .. import schemas, models
 from ..core.deps import get_current_user
 from typing import List, Optional
+from pydantic import BaseModel
 
 router = APIRouter()
+
+
+class RecommendationResponse(BaseModel):
+    """
+    Response model for AI-powered learning recommendation.
+
+    Fields:
+    - text: Human-readable recommendation message based on user's progress
+    - course_id: (optional) Suggested course ID if recommendation relates to a specific course
+    - lesson_id: (optional) Suggested lesson ID if recommendation relates to a specific lesson
+
+    Note: AI recommendations are generated based on progress percentage:
+    - 70%+: Suggest advanced topics or new challenges
+    - 40-70%: Encourage continuation of current lessons
+    - <40%: Suggest beginner-friendly lessons for foundation building
+    """
+    text: str
+    course_id: Optional[str] = None
+    lesson_id: Optional[str] = None
 
 
 @router.get("/", response_model=List[schemas.NotificationRead])
@@ -168,13 +188,13 @@ async def get_achievements(
 ):
     """
     Retrieve all achievements unlocked by the current user.
-    
+
     Features:
     - Get complete list of user's unlocked achievements
     - Shows achievement details including title, description, icon/badge
     - Ordered by most recently unlocked first
     - Includes unlock timestamps
-    
+
     Returns:
     - List[AchievementRead]: Array of achievement objects for current user
       Each achievement includes:
@@ -185,10 +205,10 @@ async def get_achievements(
       * icon/badge_url - Visual representation of achievement
       * unlocked_at - Timestamp when achievement was earned
       * metadata - Additional achievement data (points, category, etc.)
-    
+
     Authentication: Required (current_user)
     HTTP Status: 200 OK on success
-    
+
     Notes:
     - Returns empty list if user has not unlocked any achievements yet
     - Ordered by unlocked_at DESC (most recent first)
@@ -199,7 +219,78 @@ async def get_achievements(
     q = select(models.Achievement).where(
         models.Achievement.user_id == current_user.id
     ).order_by(models.Achievement.unlocked_at.desc())
-    
+
     # Execute query and return all achievements
     res = await db.execute(q)
     return res.scalars().all()
+
+
+@router.get("/recommendations", response_model=RecommendationResponse)
+async def get_ai_recommendation(
+    db: AsyncSession = Depends(get_db),
+    current_user: models.User = Depends(get_current_user)
+):
+    """
+    Generate personalized AI recommendation based on user's learning progress.
+
+    Features:
+    - Analyzes user's progress across all lessons
+    - Provides context-aware recommendations
+    - Suggests specific lessons or courses when applicable
+    - Scales recommendations based on progress percentage
+
+    Returns:
+    - RecommendationResponse with:
+      * text: AI-generated recommendation message
+      * lesson_id: Suggested lesson (if applicable)
+      * course_id: Suggested course (if applicable)
+
+    Recommendation Logic:
+    - Progress >= 70%: Suggest advanced topics to challenge mastery
+    - Progress 40-70%: Encourage continuation to deepen understanding
+    - Progress < 40%: Suggest beginner-friendly lessons for foundation
+    - No progress: Encourage course exploration
+
+    Authentication: Required (current_user)
+    HTTP Status: 200 OK
+
+    Notes:
+    - Based on highest progress lesson (user is doing best in)
+    - Recommendations update dynamically as user progresses
+    - Useful for motivational messaging and guided learning paths
+    """
+    # Get user's progress ordered by highest progress_pct first
+    q = select(models.Progress).where(
+        models.Progress.user_id == current_user.id
+    ).order_by(models.Progress.progress_pct.desc())
+    res = await db.execute(q)
+    progresses = res.scalars().all()
+
+    # Return encouragement message if no progress exists
+    if not progresses:
+        return RecommendationResponse(
+            text="Start by exploring our courses to find topics that interest you!"
+        )
+
+    # Get the lesson with highest progress (user's strongest area)
+    best_progress = progresses[0]
+
+    # Generate recommendation based on progress level
+    if best_progress.progress_pct >= 70:
+        # User is mastering this topic; suggest advancement
+        return RecommendationResponse(
+            text="You're doing well! Try advanced topics to challenge yourself.",
+            lesson_id=str(best_progress.lesson_id)
+        )
+    elif best_progress.progress_pct >= 40:
+        # User is making good progress; encourage continuation
+        return RecommendationResponse(
+            text="Keep up the momentum! Continue with your current lessons to master the concepts.",
+            lesson_id=str(best_progress.lesson_id)
+        )
+    else:
+        # User is early in progress; suggest building foundation
+        return RecommendationResponse(
+            text="Start with our beginner-friendly lessons to build a strong foundation.",
+            lesson_id=str(best_progress.lesson_id)
+        )

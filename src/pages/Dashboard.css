@@ -50,6 +50,14 @@
 .logo-icon {
   font-size: 24px;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-icon svg {
+  width: 24px;
+  height: 24px;
 }
 .logo-text {
   font-family: var(--font-logo);
@@ -86,7 +94,19 @@
   color: #fff;
   box-shadow: 0 8px 20px rgba(170,51,240,0.12);
 }
-.nav-link .nav-ico { font-size: 18px; display:inline-block; width:22px; text-align:center; }
+.nav-link .nav-ico { 
+  font-size: 18px; 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  flex-shrink: 0;
+}
+
+.nav-link .nav-ico svg {
+  width: 18px;
+  height: 18px;
+}
 .nav-link .label { font-weight:700; color:inherit; }
 .nav-link.small {
   font-size: 15px;

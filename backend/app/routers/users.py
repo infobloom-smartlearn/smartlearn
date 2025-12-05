@@ -22,9 +22,82 @@ from sqlalchemy import select, update
 from ..db.session import get_db
 from .. import schemas, models
 from ..core.deps import get_current_user
+from ..core import security
 from uuid import UUID
 
 router = APIRouter()
+
+
+@router.post("/", response_model=schemas.UserRead, status_code=status.HTTP_201_CREATED, tags=["users"])
+async def create_user(
+    payload: schemas.UserCreate,
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Create a new user account for testing purposes.
+
+    This endpoint is primarily intended for Swagger UI testing and development.
+    It allows creating user accounts without requiring authentication, which can
+    then be used to test other authenticated endpoints.
+
+    Features:
+    - Create new user account with email and password
+    - Validate email uniqueness
+    - Hash password securely with bcrypt
+    - Return created user object
+
+    Request Body:
+    - email: (required) User's email address (must be unique)
+    - password: (required) User's password (minimum length enforced)
+
+    Returns:
+    - UserRead: Created user object with:
+      * id - Generated UUID for user
+      * email - User's email address
+      * created_at - Account creation timestamp
+      * is_active - Always True for new users
+
+    Raises:
+    - HTTPException (400): If email already registered
+    - HTTPException (422): If validation fails
+
+    Authentication: Not required (public endpoint for testing)
+    HTTP Status: 201 Created on success, 400 Bad Request if email exists
+
+    Note:
+    - This endpoint is for development/testing purposes
+    - In production, consider removing or restricting this endpoint
+    - Use the created user credentials with POST /api/auth/login for authentication
+    """
+    # Check if email already registered
+    q = select(models.User).where(models.User.email == payload.email)
+    res = await db.execute(q)
+    existing = res.scalar_one_or_none()
+
+    # Reject if email already in use
+    if existing:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email already registered"
+        )
+
+    # Create new user with hashed password
+    user = models.User(
+        email=payload.email,
+        hashed_password=security.hash_password(payload.password)
+    )
+
+    # Add to session and flush to get ID
+    db.add(user)
+    await db.flush()
+
+    # Commit transaction
+    await db.commit()
+
+    # Refresh to get all defaults (created_at, etc.)
+    await db.refresh(user)
+
+    return user
 
 
 @router.get("/me", response_model=schemas.UserRead)

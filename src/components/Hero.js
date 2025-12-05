@@ -1,14 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { FaLightbulb, FaArrowRight, FaUserGraduate, FaChalkboardTeacher, FaUsers } from 'react-icons/fa';
+import { HiBookOpen, HiChartBar } from 'react-icons/hi';
 import './Hero.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function Hero() {
     const navigate = useNavigate();
+    const [isScrolled, setIsScrolled] = useState(false);
+    const heroRef = useRef(null);
 
     // small typewriter for subtitle to make the hero feel alive
     const messages = [
         'Personalized learning at your fingertips.',
-        'Lessons that adapt to your child’s pace.',
+        'Lessons that adapt to your child\'s pace.',
         'Interactive learning parents can trust.'
     ];
 
@@ -18,6 +22,21 @@ export default function Hero() {
 
     // persona preview (updates illustration and CTA on hover/click)
     const [persona, setPersona] = useState('student');
+    const [illustrationLoaded, setIllustrationLoaded] = useState(false);
+
+    // Scroll effect for navbar
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Animation on mount
+    useEffect(() => {
+        setIllustrationLoaded(true);
+    }, []);
 
     useEffect(() => {
         // typewriter effect for messages[msgIndex]
@@ -38,68 +57,90 @@ export default function Hero() {
         return () => clearInterval(typingRef.current);
     }, [msgIndex]);
 
-    // CTA action is context-aware (persona)
+    // CTA action navigates to signup page
     function handleGetStarted() {
-        // if student => take them to onboarding steps else to details
-        if (persona === 'student') navigate('/onboarding/step-1');
-        else navigate('/onboarding');
+        navigate('/signup');
     }
 
     return (
-        <section className="hero">
+        <section className="hero" ref={heroRef}>
             <div className="hero-inner">
                 <div className="hero-left">
-                    <div className="badge">SmartLearn</div>
+                    
 
-                    <h1 className="title">Welcome to SmartLearn</h1>
+                    <h1 className={`title ${illustrationLoaded ? 'fade-in-delay-1' : ''}`}>
+                        Transform Learning with
+                        <span className="title-gradient"> SmartLearn</span>
+                    </h1>
 
-                    <p className="subtitle" aria-live="polite">{typed}<span className="type-cursor">▍</span></p>
+                    <p className={`subtitle ${illustrationLoaded ? 'fade-in-delay-2' : ''}`} aria-live="polite">
+                        {typed}
+                        <span className="type-cursor">▍</span>
+                    </p>
 
-                    <div className="hero-cta-row">
+                    <div className={`hero-cta-row ${illustrationLoaded ? 'fade-in-delay-3' : ''}`}>
                         <button
                             className="get-started"
                             onClick={handleGetStarted}
                             aria-label="Get started onboarding"
                         >
-                            Get Started
-                            <span className="get-started-icon" aria-hidden>→</span>
+                            <span>Get Started</span>
+                            <FaArrowRight className="get-started-icon" aria-hidden="true" />
                         </button>
 
                         <button
                             className="secondary"
-                            onClick={() => setPersona('teacher')}
-                            aria-pressed={persona === 'teacher'}
+                            onClick={() => navigate('/signin')}
                         >
-                            Explore Teacher
+                            Sign In
                         </button>
                     </div>
 
-                    <div className="persona-picker" role="tablist" aria-label="Try a persona">
-                        {['teacher', 'parent', 'student'].map((p) => (
-                            <button
-                                key={p}
-                                className={`persona-pill ${persona === p ? 'active' : ''}`}
-                                onMouseEnter={() => setPersona(p)}
-                                onFocus={() => setPersona(p)}
-                                onClick={() => setPersona(p)}
-                                aria-selected={persona === p}
-                                role="tab"
-                            >
-                                {p[0].toUpperCase() + p.slice(1)}
-                            </button>
-                        ))}
+
+                    {/* Stats */}
+                    <div className={`hero-stats ${illustrationLoaded ? 'fade-in-delay-5' : ''}`}>
+                        <div className="stat-item">
+                            <div className="stat-number">10K+</div>
+                            <div className="stat-label">Active Learners</div>
+                        </div>
+                        <div className="stat-item">
+                            <div className="stat-number">500+</div>
+                            <div className="stat-label">Expert Teachers</div>
+                        </div>
+                        <div className="stat-item">
+                            <div className="stat-number">95%</div>
+                            <div className="stat-label">Success Rate</div>
+                        </div>
                     </div>
                 </div>
 
-                <div className="hero-right" aria-hidden="false">
+                <div className={`hero-right ${illustrationLoaded ? 'slide-in' : ''}`} aria-hidden="false">
                     <div className={`illustration large ${persona}`}>
                         {/* images served from /public */}
-                        <img src={persona === 'student' ? '/student.png' : persona === 'parent' ? '/parent.png' : '/teacher.png'} alt="" className="hero-portrait" />
+                        <img 
+                            src={persona === 'student' ? '/student.png' : persona === 'parent' ? '/parent.png' : '/teacher.png'} 
+                            alt={`${persona} illustration`} 
+                            className="hero-portrait"
+                            onLoad={() => setIllustrationLoaded(true)}
+                        />
+                        <div className="illustration-glow"></div>
                     </div>
 
                     <div className="floating-cards">
-                        <div className="card">Sample lesson</div>
-                        <div className="card right">Progress stats</div>
+                        <div className="card card-1">
+                            <HiBookOpen className="card-icon" />
+                            <div className="card-content">
+                                <div className="card-title">Sample Lesson</div>
+                                <div className="card-subtitle">Interactive content</div>
+                            </div>
+                        </div>
+                        <div className="card card-2">
+                            <HiChartBar className="card-icon" />
+                            <div className="card-content">
+                                <div className="card-title">Progress Stats</div>
+                                <div className="card-subtitle">Track your growth</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

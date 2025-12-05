@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { FaLightbulb, FaUserGraduate, FaChalkboardTeacher, FaUsers, FaBullseye, FaChartBar, FaBook, FaRobot, FaTrophy } from 'react-icons/fa';
+import { HiExclamationCircle } from 'react-icons/hi';
 import './SignIn.css';
 
 const SignIn = () => {
@@ -10,6 +12,81 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+
+  // Define handleGoogleSignIn before useEffect
+  const handleGoogleSignIn = React.useCallback(async (response) => {
+    setGoogleLoading(true);
+    setError('');
+
+    try {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
+      
+      // Send Google credential to backend
+      const backendResponse = await fetch(`${apiUrl}/auth/google`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          credential: response.credential,
+          user_type: userType,
+        }),
+      });
+
+      if (!backendResponse.ok) {
+        const errorData = await backendResponse.json();
+        throw new Error(errorData.detail || 'Google sign-in failed. Please try again.');
+      }
+
+      const data = await backendResponse.json();
+      
+      // Store token in localStorage
+      localStorage.setItem('token', data.access_token);
+      localStorage.setItem('userType', userType);
+      
+      // Redirect all users to onboarding page
+      navigate('/onboarding');
+    } catch (err) {
+      setError(err.message || 'An error occurred during Google sign-in');
+      console.error('Google sign-in error:', err);
+    } finally {
+      setGoogleLoading(false);
+    }
+  }, [userType, navigate]);
+
+  // Load Google OAuth script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://accounts.google.com/gsi/client';
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      if (window.google && window.google.accounts) {
+        window.google.accounts.id.initialize({
+          client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID || '',
+          callback: handleGoogleSignIn,
+        });
+      }
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup
+      const existingScript = document.querySelector('script[src="https://accounts.google.com/gsi/client"]');
+      if (existingScript) {
+        document.body.removeChild(existingScript);
+      }
+    };
+  }, [handleGoogleSignIn]); // Re-initialize when callback changes
+
+  const handleGoogleButtonClick = () => {
+    if (window.google && window.google.accounts) {
+      window.google.accounts.id.prompt();
+    } else {
+      setError('Google Sign-In is not available. Please check your configuration.');
+    }
+  };
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -53,14 +130,8 @@ const SignIn = () => {
       localStorage.setItem('token', data.access_token);
       localStorage.setItem('userType', userType); // Store the selected user type
       
-      // Redirect based on user type
-      if (userType === 'teacher') {
-        navigate('/dashboard'); // Teachers go to dashboard
-      } else if (userType === 'parent') {
-        navigate('/dashboard'); // Parents go to dashboard
-      } else {
-        navigate('/dashboard'); // Students go to dashboard
-      }
+      // Redirect all users to onboarding page
+      navigate('/onboarding');
     } catch (err) {
       setError(err.message || 'An error occurred during login');
       console.error('Sign in error:', err);
@@ -79,6 +150,39 @@ const SignIn = () => {
         <div className="signin-card">
           {/* Header */}
           <div className="signin-header">
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              gap: '12px', 
+              marginBottom: '24px' 
+            }}>
+              <div style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                background: 'linear-gradient(90deg, #AA33F0 0%, #CF7DEF 100%)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '24px',
+                color: '#fff',
+                boxShadow: '0 4px 12px rgba(170, 51, 240, 0.3)'
+              }}>
+                <FaLightbulb />
+              </div>
+              <span style={{
+                fontFamily: "'DynaPuff', cursive",
+                fontSize: '28px',
+                fontWeight: 400,
+                background: 'linear-gradient(90deg, #AA33F0 0%, #CF7DEF 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>
+                SmartLearn
+              </span>
+            </div>
             <h1>Welcome Back</h1>
             <p>Sign in to your SmartLearn account</p>
           </div>
@@ -92,7 +196,7 @@ const SignIn = () => {
                 className={`user-type-btn ${userType === 'student' ? 'active' : ''}`}
                 onClick={() => setUserType('student')}
               >
-                <span className="icon">👨‍🎓</span>
+                <span className="icon"><FaUserGraduate /></span>
                 <span className="label">Student</span>
               </button>
               <button
@@ -100,7 +204,7 @@ const SignIn = () => {
                 className={`user-type-btn ${userType === 'teacher' ? 'active' : ''}`}
                 onClick={() => setUserType('teacher')}
               >
-                <span className="icon">👩‍🏫</span>
+                <span className="icon"><FaChalkboardTeacher /></span>
                 <span className="label">Teacher</span>
               </button>
               <button
@@ -108,7 +212,7 @@ const SignIn = () => {
                 className={`user-type-btn ${userType === 'parent' ? 'active' : ''}`}
                 onClick={() => setUserType('parent')}
               >
-                <span className="icon">👨‍👩‍👧</span>
+                <span className="icon"><FaUsers /></span>
                 <span className="label">Parent</span>
               </button>
             </div>
@@ -117,7 +221,7 @@ const SignIn = () => {
           {/* Error Message */}
           {error && (
             <div className="error-message">
-              <span className="error-icon">⚠️</span>
+              <HiExclamationCircle className="error-icon" />
               <span>{error}</span>
             </div>
           )}
@@ -176,11 +280,50 @@ const SignIn = () => {
             <button
               type="submit"
               className="signin-btn"
-              disabled={loading}
+              disabled={loading || googleLoading}
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
+
+          {/* Divider */}
+          <div className="form-divider">
+            <span>Or continue with</span>
+          </div>
+
+          {/* Google Sign In Button */}
+          <button
+            type="button"
+            className="google-signin-btn"
+            onClick={handleGoogleButtonClick}
+            disabled={loading || googleLoading}
+          >
+            {googleLoading ? (
+              <span>Signing in...</span>
+            ) : (
+              <>
+                <svg width="18" height="18" viewBox="0 0 18 18" style={{ marginRight: '8px' }}>
+                  <path
+                    fill="#4285F4"
+                    d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M9 18c2.43 0 4.467-.806 5.96-2.184l-2.908-2.258c-.806.54-1.837.86-3.052.86-2.347 0-4.332-1.585-5.043-3.715H.957v2.332C2.438 15.983 5.482 18 9 18z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M3.957 10.713c-.18-.54-.282-1.117-.282-1.713s.102-1.173.282-1.713V4.955H.957C.348 6.173 0 7.55 0 9s.348 2.827.957 4.045l3-2.332z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.955L3.957 7.287C4.668 5.157 6.653 3.58 9 3.58z"
+                  />
+                </svg>
+                <span>Sign in with Google</span>
+              </>
+            )}
+          </button>
 
           {/* Divider */}
           <div className="form-divider">
@@ -192,7 +335,7 @@ const SignIn = () => {
             type="button"
             className="signup-btn"
             onClick={handleSignUp}
-            disabled={loading}
+            disabled={loading || googleLoading}
           >
             Create a new account
           </button>
@@ -211,23 +354,23 @@ const SignIn = () => {
             <h2>Why SmartLearn?</h2>
             <ul className="features-list">
               <li>
-                <span className="feature-icon">🎯</span>
+                <FaBullseye className="feature-icon" />
                 <span>Personalized Learning Paths</span>
               </li>
               <li>
-                <span className="feature-icon">🤖</span>
+                <FaRobot className="feature-icon" />
                 <span>AI-Powered Tutoring</span>
               </li>
               <li>
-                <span className="feature-icon">📊</span>
+                <FaChartBar className="feature-icon" />
                 <span>Progress Tracking & Analytics</span>
               </li>
               <li>
-                <span className="feature-icon">🏆</span>
+                <FaTrophy className="feature-icon" />
                 <span>Achievements & Gamification</span>
               </li>
               <li>
-                <span className="feature-icon">📚</span>
+                <FaBook className="feature-icon" />
                 <span>Rich Learning Content</span>
               </li>
             </ul>

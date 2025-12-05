@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import OnboardingStep3 from './pages/OnboardingStep3';
 import Hero from './components/Hero';
 import Features from './components/Features';
+import Footer from './components/Footer';
 import Dashboard from './pages/Dashboard';
 import Lessons from './pages/Lessons';
 import Quiz from './pages/Quiz';
@@ -17,6 +18,17 @@ import Profile from './pages/Profile';
 import AiTutor from './pages/AiTutor';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import TeacherDashboard from './pages/TeacherDashboard';
+import TeacherLessons from './pages/TeacherLessons';
+import TeacherCourses from './pages/TeacherCourses';
+import TeacherAnalytics from './pages/TeacherAnalytics';
+import TeacherProfile from './pages/TeacherProfile';
+import ParentDashboard from './pages/ParentDashboard';
+import ParentChildProfiles from './pages/ParentChildProfiles';
+import ParentQuizReports from './pages/ParentQuizReports';
+import ParentMessages from './pages/ParentMessages';
+import ParentSettings from './pages/ParentSettings';
+import ParentProfile from './pages/ParentProfile';
 
 function Home() {
   return (
@@ -24,6 +36,7 @@ function Home() {
       <Navbar />
       <Hero />
       <Features />
+      <Footer />
     </div>
   );
 }
@@ -47,6 +60,20 @@ function App() {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/ai-tutor" element={<AiTutor />} />
+        {/* Teacher experience */}
+        <Route path="/teacher" element={<TeacherDashboard />} />
+        <Route path="/teacher/lessons" element={<TeacherLessons />} />
+        <Route path="/teacher/courses" element={<TeacherCourses />} />
+        <Route path="/teacher/analytics" element={<TeacherAnalytics />} />
+        <Route path="/teacher/profile" element={<TeacherProfile />} />
+        {/* Parent experience */}
+        <Route path="/parent" element={<ParentDashboard />} />
+        <Route path="/parent/profiles" element={<ParentChildProfiles />} />
+        <Route path="/parent/quiz-reports" element={<ParentQuizReports />} />
+        <Route path="/parent/messages" element={<ParentMessages />} />
+        <Route path="/parent/notifications" element={<ParentDashboard />} />
+        <Route path="/parent/profile" element={<ParentProfile />} />
+        <Route path="/parent/settings" element={<ParentSettings />} />
         {/* add further steps like /onboarding/step-4 next */}
         {/* ...other routes... */}
       </Routes>

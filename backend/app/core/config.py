@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     CORS_ORIGINS: List[str] = ["http://localhost:3000"]
 
     class Config:
-        env_file = str(Path(__file__).parent.parent.parent / ".env")
+        pass
 
 
 settings = Settings()
