@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { FaLightbulb, FaUserGraduate, FaChalkboardTeacher, FaUsers, FaBullseye, FaChartBar, FaBook, FaRobot, FaTrophy } from 'react-icons/fa';
 import { HiExclamationCircle } from 'react-icons/hi';
 import './SignIn.css';
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('student'); // 'student', 'teacher', 'parent'
@@ -14,39 +15,40 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
 
+  // Pre-fill email and userType if coming from signup
+  useEffect(() => {
+    if (location.state) {
+      if (location.state.email) {
+        setEmail(location.state.email);
+      }
+      if (location.state.userType) {
+        setUserType(location.state.userType);
+      }
+    }
+  }, [location]);
+
   // Define handleGoogleSignIn before useEffect
   const handleGoogleSignIn = React.useCallback(async (response) => {
     setGoogleLoading(true);
     setError('');
 
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
-      
-      // Send Google credential to backend
-      const backendResponse = await fetch(`${apiUrl}/auth/google`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          credential: response.credential,
-          user_type: userType,
-        }),
-      });
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      if (!backendResponse.ok) {
-        const errorData = await backendResponse.json();
-        throw new Error(errorData.detail || 'Google sign-in failed. Please try again.');
-      }
-
-      const data = await backendResponse.json();
-      
-      // Store token in localStorage
-      localStorage.setItem('token', data.access_token);
+      // Simulate Google authentication
+      localStorage.setItem('token', 'simulated_google_token_' + Date.now());
       localStorage.setItem('userType', userType);
+      localStorage.setItem('isAuthenticated', 'true');
       
-      // Redirect all users to onboarding page
-      navigate('/onboarding');
+      // Redirect based on user type to their respective dashboard
+      if (userType === 'teacher') {
+        navigate('/teacher');
+      } else if (userType === 'parent') {
+        navigate('/parent');
+      } else {
+        navigate('/onboarding');
+      }
     } catch (err) {
       setError(err.message || 'An error occurred during Google sign-in');
       console.error('Google sign-in error:', err);
@@ -106,32 +108,24 @@ const SignIn = () => {
         return;
       }
 
-      // Call backend login endpoint
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
-      const response = await fetch(`${apiUrl}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-          username: email, // Backend expects username field (which is email)
-          password: password,
-        }),
-      });
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Login failed. Please check your credentials.');
+      // Simulate authentication - accept any email/password combination
+      // Store authentication state
+      localStorage.setItem('token', 'simulated_token_' + Date.now());
+      localStorage.setItem('userType', userType);
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('isAuthenticated', 'true');
+      
+      // Redirect based on user type to their respective dashboard
+      if (userType === 'teacher') {
+        navigate('/teacher');
+      } else if (userType === 'parent') {
+        navigate('/parent');
+      } else {
+        navigate('/onboarding');
       }
-
-      const data = await response.json();
-      
-      // Store token in localStorage
-      localStorage.setItem('token', data.access_token);
-      localStorage.setItem('userType', userType); // Store the selected user type
-      
-      // Redirect all users to onboarding page
-      navigate('/onboarding');
     } catch (err) {
       setError(err.message || 'An error occurred during login');
       console.error('Sign in error:', err);

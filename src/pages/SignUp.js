@@ -29,43 +29,20 @@ const SignUp = () => {
     setSuccess('');
 
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
-      
-      // Send Google credential to backend
-      const backendResponse = await fetch(`${apiUrl}/auth/google`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          credential: response.credential,
-          user_type: formData.userType,
-        }),
-      });
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      if (!backendResponse.ok) {
-        const errorData = await backendResponse.json();
-        throw new Error(errorData.detail || 'Google sign-up failed. Please try again.');
-      }
-
-      const data = await backendResponse.json();
-      
-      // Store token in localStorage
-      localStorage.setItem('token', data.access_token);
+      // Simulate Google registration - store user data (but not authentication token)
       localStorage.setItem('userType', formData.userType);
       
       // Show success message
-      setSuccess('Account created successfully! Redirecting...');
+      setSuccess('Account created successfully! Redirecting to sign in page...');
       
-      // Redirect based on user type
+      // Redirect to sign in page
       setTimeout(() => {
-        if (formData.userType === 'teacher') {
-          navigate('/teacher');
-        } else if (formData.userType === 'parent') {
-          navigate('/parent');
-        } else {
-          navigate('/onboarding');
-        }
+        navigate('/signin', {
+          state: { userType: formData.userType },
+        });
       }, 1500);
     } catch (err) {
       setError(err.message || 'An error occurred during Google sign-up');
@@ -199,43 +176,25 @@ const SignUp = () => {
     setLoading(true);
 
     try {
-      // Call backend registration endpoint
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
-      const response = await fetch(`${apiUrl}/auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.detail || 'Registration failed. Please try again.'
-        );
-      }
-
-      const data = await response.json();
+      // Simulate registration - store user data (but not authentication token)
+      localStorage.setItem('userType', formData.userType);
+      localStorage.setItem('userEmail', formData.email);
+      localStorage.setItem('userName', `${formData.firstName} ${formData.lastName}`);
 
       // Show success message
       setSuccess(
         'Account created successfully! Redirecting to sign in page...'
       );
 
-      // Store user info temporarily
-      localStorage.setItem('newUserEmail', formData.email);
-      localStorage.setItem('userType', formData.userType);
-
-      // Redirect to sign in after 2 seconds
+      // Redirect to sign in page after 1.5 seconds
       setTimeout(() => {
         navigate('/signin', {
           state: { email: formData.email, userType: formData.userType },
         });
-      }, 2000);
+      }, 1500);
     } catch (err) {
       setError(err.message || 'An error occurred during registration');
       console.error('Sign up error:', err);
