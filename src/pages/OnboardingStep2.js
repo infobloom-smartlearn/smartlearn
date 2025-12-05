@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './OnboardingStep2.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
-
 export default function OnboardingStep2() {
   const navigate = useNavigate();
 
@@ -17,63 +15,51 @@ export default function OnboardingStep2() {
 
   // learning styles state (checkbox style)
   const [styles, setStyles] = useState({ visual: true, audio: false, handsOn: true });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Load saved step-2 data on mount
+  // Load saved step-2 data from localStorage on mount
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const token = localStorage.getItem('access_token');
-        if (!token) {
-          setLoading(false);
-          return;
-        }
-        const response = await fetch(`${API_URL}/onboarding/me/step2`, {
-          headers: { 'Authorization': `Bearer ${token}` },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          if (data.subjects && Object.keys(data.subjects).length > 0) {
-            setSubjects(data.subjects);
-          }
-          if (data.styles && Object.keys(data.styles).length > 0) {
-            setStyles(data.styles);
-          }
-        }
-      } catch (err) {
-        console.error('Error loading step-2 data:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadData();
-  }, []);
-
-  // Save step-2 data and navigate to step-3
-  const handleContinue = async () => {
     try {
-      const token = localStorage.getItem('access_token');
-      if (!token) {
-        setError('Not authenticated. Please log in.');
-        return;
-      }
-      const response = await fetch(`${API_URL}/onboarding/me/step2`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ subjects, styles }),
-      });
-      if (response.ok) {
-        navigate('/onboarding/step-3');
-      } else {
-        setError('Failed to save step-2 data.');
+      const savedData = localStorage.getItem('onboarding_step2');
+      if (savedData) {
+        const data = JSON.parse(savedData);
+        if (data.subjects && Object.keys(data.subjects).length > 0) {
+          setSubjects(data.subjects);
+        }
+        if (data.styles && Object.keys(data.styles).length > 0) {
+          setStyles(data.styles);
+        }
       }
     } catch (err) {
+      console.error('Error loading step-2 data from localStorage:', err);
+    }
+  }, []);
+
+  // Save step-2 data to localStorage and navigate to step-3
+  const handleContinue = () => {
+    try {
+      // Save to localStorage
+      const step2Data = {
+        subjects,
+        styles
+      };
+      localStorage.setItem('onboarding_step2', JSON.stringify(step2Data));
+
+      // Update user profile data if available
+      const userProfile = localStorage.getItem('userProfile');
+      if (userProfile) {
+        const profile = JSON.parse(userProfile);
+        profile.subjects = subjects;
+        profile.styles = styles;
+        localStorage.setItem('userProfile', JSON.stringify(profile));
+      }
+
+      // Navigate to step 3
+      navigate('/onboarding/step-3');
+    } catch (err) {
       console.error('Error saving step-2 data:', err);
-      setError('An error occurred.');
+      setError('An error occurred while saving your preferences.');
     }
   };
 
@@ -201,8 +187,8 @@ export default function OnboardingStep2() {
 
           <div className="actions-row">
             <button className="btn back" onClick={() => navigate('/onboarding/step-1')}>Back</button>
-            <button className="btn primary" onClick={handleContinue} disabled={loading}>
-              {loading ? 'Loading...' : 'Continue'}
+            <button className="btn primary" onClick={handleContinue}>
+              Continue
             </button>
           </div>
         </section>

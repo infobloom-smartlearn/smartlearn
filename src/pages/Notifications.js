@@ -1,6 +1,17 @@
 import React, {useState} from 'react';
 import './Notifications.css';
 import { Link } from 'react-router-dom';
+import { 
+  FaLightbulb, 
+  FaHome, 
+  FaEdit, 
+  FaBell, 
+  FaBook, 
+  FaUser, 
+  FaRobot, 
+  FaCog,
+  FaChartLine
+} from 'react-icons/fa';
 
 const sampleNotifications = [
   {
@@ -76,22 +87,31 @@ export default function Notifications(){
   return (
     <div className="notifications-root">
       <aside className="notif-sidebar">
-        <div className="logo-block">
-          <div className="logo-circle">💡</div>
-          <div className="logo-text">SmartLearn</div>
+        <div className="sidebar-top">
+          <div className="logo-block">
+            <div className="logo-circle">
+              <FaLightbulb className="logo-icon" />
+            </div>
+            <span className="logo-text">SmartLearn</span>
+          </div>
+          <nav className="nav-links">
+            <Link className="nav-link" to="/app"><FaHome className="nav-ico" /><span className="label">Home</span></Link>
+            <Link className="nav-link" to="/quiz"><FaEdit className="nav-ico" /><span className="label">Quiz</span></Link>
+            <Link className="nav-link active" to="/notifications"><FaBell className="nav-ico" /><span className="label">Notifications</span></Link>
+            <Link className="nav-link" to="/lessons"><FaBook className="nav-ico" /><span className="label">Lessons</span></Link>
+            <Link className="nav-link" to="/profile"><FaUser className="nav-ico" /><span className="label">Profile</span></Link>
+            <Link className="nav-link" to="/ai-tutor"><FaRobot className="nav-ico" /><span className="label">AI Tutor</span></Link>
+            <Link className="nav-link" to="/settings"><FaCog className="nav-ico" /><span className="label">Settings</span></Link>
+          </nav>
         </div>
-
-        <nav className="nav-links">
-          <Link className="nav-link" to="/app"><span className="nav-ico">🏠</span><span className="label">Home</span></Link>
-          <Link className="nav-link" to="/quiz"><span className="nav-ico">📝</span><span className="label">Quiz</span></Link>
-          <Link className="nav-link active" to="/notifications"><span className="nav-ico">🔔</span><span className="label">Notifications</span></Link>
-          <Link className="nav-link" to="/app"><span className="nav-ico">📚</span><span className="label">Lessons</span></Link>
-          <Link className="nav-link" to="/profile"><span className="nav-ico">👤</span><span className="label">Profile</span></Link>
-          <Link className="nav-link" to="/app"><span className="nav-ico">🤖</span><span className="label">AI Tutor</span></Link>
-          <Link className="nav-link" to="#"><span className="nav-ico">🎮</span><span className="label">Games</span></Link>
-          <Link className="nav-link" to="/settings"><span className="nav-ico">⚙️</span><span className="label">Settings</span></Link>
-        </nav>
-
+        <div className="sidebar-bottom">
+          <Link className="nav-link small" to="#"><FaChartLine className="nav-ico" /><span className="label">AI Insights</span></Link>
+          <div className="ai-buddy-block">
+            <div className="ai-buddy-title">AI Buddy</div>
+            <div className="ai-buddy-desc">Ready to help you learn something new today!</div>
+            <Link className="ai-buddy-chat" to="/ai-tutor">Chat</Link>
+          </div>
+        </div>
       </aside>
 
       <main className="notif-main">

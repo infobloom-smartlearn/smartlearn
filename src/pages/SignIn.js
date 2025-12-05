@@ -144,38 +144,11 @@ const SignIn = () => {
         <div className="signin-card">
           {/* Header */}
           <div className="signin-header">
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center', 
-              gap: '12px', 
-              marginBottom: '24px' 
-            }}>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '50%',
-                background: 'linear-gradient(90deg, #AA33F0 0%, #CF7DEF 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '24px',
-                color: '#fff',
-                boxShadow: '0 4px 12px rgba(170, 51, 240, 0.3)'
-              }}>
+            <div className="logo-container">
+              <div className="logo-icon">
                 <FaLightbulb />
               </div>
-              <span style={{
-                fontFamily: "'DynaPuff', cursive",
-                fontSize: '28px',
-                fontWeight: 400,
-                background: 'linear-gradient(90deg, #AA33F0 0%, #CF7DEF 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}>
-                SmartLearn
-              </span>
+              <span className="logo-text">SmartLearn</span>
             </div>
             <h1>Welcome Back</h1>
             <p>Sign in to your SmartLearn account</p>

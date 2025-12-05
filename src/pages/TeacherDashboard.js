@@ -6,7 +6,6 @@ import {
   FaChartBar, 
   FaHome, 
   FaFileAlt, 
-  FaCog,
   FaPlus
 } from 'react-icons/fa';
 import './TeacherDashboard.css';
@@ -262,12 +261,6 @@ export default function TeacherDashboard() {
               <span className="teacher-nav-label">Analytics</span>
             </Link>
           </nav>
-        </div>
-        <div className="teacher-nav-links">
-          <Link className="teacher-nav-link" to="/settings">
-            <FaCog className="teacher-nav-ico" />
-            <span className="teacher-nav-label">Settings</span>
-          </Link>
         </div>
       </aside>
 

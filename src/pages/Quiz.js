@@ -1,5 +1,16 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { 
+  FaLightbulb, 
+  FaHome, 
+  FaEdit, 
+  FaBell, 
+  FaBook, 
+  FaUser, 
+  FaRobot, 
+  FaCog,
+  FaChartLine
+} from 'react-icons/fa';
 import './Quiz.css';
 
 const sampleQuizzes = [
@@ -134,14 +145,31 @@ export default function Quiz() {
   return (
     <div className="quiz-root">
       <aside className="quiz-sidebar">
-        <div className="logo-small">💡</div>
-        <nav className="side-icons">
-          <Link to="/app" className="icon">🏠</Link>
-          <Link to="/lessons" className="icon">📚</Link>
-          <Link to="/quiz" className="icon active">📝</Link>
-          <Link to="/notifications" className="icon">🔔</Link>
-          <Link to="/profile" className="icon">👤</Link>
-        </nav>
+        <div className="sidebar-top">
+          <div className="logo-block">
+            <div className="logo-circle">
+              <FaLightbulb className="logo-icon" />
+            </div>
+            <span className="logo-text">SmartLearn</span>
+          </div>
+          <nav className="nav-links">
+            <Link className="nav-link" to="/app"><FaHome className="nav-ico" /><span className="label">Home</span></Link>
+            <Link className="nav-link active" to="/quiz"><FaEdit className="nav-ico" /><span className="label">Quiz</span></Link>
+            <Link className="nav-link" to="/notifications"><FaBell className="nav-ico" /><span className="label">Notifications</span></Link>
+            <Link className="nav-link" to="/lessons"><FaBook className="nav-ico" /><span className="label">Lessons</span></Link>
+            <Link className="nav-link" to="/profile"><FaUser className="nav-ico" /><span className="label">Profile</span></Link>
+            <Link className="nav-link" to="/ai-tutor"><FaRobot className="nav-ico" /><span className="label">AI Tutor</span></Link>
+            <Link className="nav-link" to="/settings"><FaCog className="nav-ico" /><span className="label">Settings</span></Link>
+          </nav>
+        </div>
+        <div className="sidebar-bottom">
+          <Link className="nav-link small" to="#"><FaChartLine className="nav-ico" /><span className="label">AI Insights</span></Link>
+          <div className="ai-buddy-block">
+            <div className="ai-buddy-title">AI Buddy</div>
+            <div className="ai-buddy-desc">Ready to help you learn something new today!</div>
+            <Link className="ai-buddy-chat" to="/ai-tutor">Chat</Link>
+          </div>
+        </div>
       </aside>
 
       <main className="quiz-main">

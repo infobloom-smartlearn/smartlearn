@@ -2,67 +2,60 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './OnboardingStep1.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
-
 export default function OnboardingStep1() {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [ageRange, setAgeRange] = useState('9-11'); // default selected
     const [grade, setGrade] = useState('');
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Load saved step-1 data on mount
+    // Load saved step-1 data from localStorage on mount
     useEffect(() => {
-        const loadData = async () => {
-            try {
-                const token = localStorage.getItem('access_token');
-                if (!token) {
-                    setLoading(false);
-                    return;
-                }
-                const response = await fetch(`${API_URL}/onboarding/me/info`, {
-                    headers: { 'Authorization': `Bearer ${token}` },
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    setName(data.name || '');
-                    setAgeRange(data.ageRange || '9-11');
-                    setGrade(data.grade || '');
-                }
-            } catch (err) {
-                console.error('Error loading step-1 data:', err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        loadData();
-    }, []);
-
-    // Save step-1 data and navigate to step-2
-    const handleContinue = async () => {
         try {
-            const token = localStorage.getItem('access_token');
-            if (!token) {
-                setError('Not authenticated. Please log in.');
-                return;
-            }
-            const response = await fetch(`${API_URL}/onboarding/me/info`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name, ageRange, grade: grade || null }),
-            });
-            if (response.ok) {
-                navigate('/onboarding/step-2');
-            } else {
-                setError('Failed to save step-1 data.');
+            const savedData = localStorage.getItem('onboarding_step1');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                setName(data.name || '');
+                setAgeRange(data.ageRange || '9-11');
+                setGrade(data.grade || '');
             }
         } catch (err) {
+            console.error('Error loading step-1 data from localStorage:', err);
+        }
+    }, []);
+
+    // Save step-1 data to localStorage and navigate to step-2
+    const handleContinue = () => {
+        if (!name.trim()) {
+            setError('Please enter your name.');
+            return;
+        }
+
+        try {
+            // Save to localStorage
+            const step1Data = {
+                name: name.trim(),
+                ageRange,
+                grade: grade || null
+            };
+            localStorage.setItem('onboarding_step1', JSON.stringify(step1Data));
+            
+            // Also save to user profile data if available
+            const userEmail = localStorage.getItem('userEmail');
+            if (userEmail) {
+                const userData = {
+                    ...step1Data,
+                    email: userEmail
+                };
+                localStorage.setItem('userProfile', JSON.stringify(userData));
+            }
+
+            // Navigate to step 2
+            navigate('/onboarding/step-2');
+        } catch (err) {
             console.error('Error saving step-1 data:', err);
-            setError('An error occurred.');
+            setError('An error occurred while saving your information.');
         }
     };
 
@@ -153,10 +146,10 @@ export default function OnboardingStep1() {
                         <button
                             className="btn primary"
                             onClick={handleContinue}
-                            disabled={!name || loading}
-                            aria-disabled={!name || loading}
+                            disabled={!name.trim()}
+                            aria-disabled={!name.trim()}
                         >
-                            {loading ? 'Loading...' : 'Continue'}
+                            Continue
                         </button>
                     </div>
                 </div>

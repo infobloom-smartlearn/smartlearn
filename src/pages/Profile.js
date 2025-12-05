@@ -1,6 +1,17 @@
 import React from 'react';
 import './Profile.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { 
+  FaLightbulb, 
+  FaHome, 
+  FaEdit, 
+  FaBell, 
+  FaBook, 
+  FaUser, 
+  FaRobot, 
+  FaCog,
+  FaChartLine
+} from 'react-icons/fa';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -21,18 +32,31 @@ export default function Profile(){
   return (
     <div className="profile-root">
       <aside className="profile-nav">
-        <div className="nav-top">
-          <div className="logo">💡<span className="logo-text">SmartLearn</span></div>
+        <div className="sidebar-top">
+          <div className="logo-block">
+            <div className="logo-circle">
+              <FaLightbulb className="logo-icon" />
+            </div>
+            <span className="logo-text">SmartLearn</span>
+          </div>
+          <nav className="nav-links">
+            <Link className="nav-link" to="/app"><FaHome className="nav-ico" /><span className="label">Home</span></Link>
+            <Link className="nav-link" to="/quiz"><FaEdit className="nav-ico" /><span className="label">Quiz</span></Link>
+            <Link className="nav-link" to="/notifications"><FaBell className="nav-ico" /><span className="label">Notifications</span></Link>
+            <Link className="nav-link" to="/lessons"><FaBook className="nav-ico" /><span className="label">Lessons</span></Link>
+            <Link className="nav-link active" to="/profile"><FaUser className="nav-ico" /><span className="label">Profile</span></Link>
+            <Link className="nav-link" to="/ai-tutor"><FaRobot className="nav-ico" /><span className="label">AI Tutor</span></Link>
+            <Link className="nav-link" to="/settings"><FaCog className="nav-ico" /><span className="label">Settings</span></Link>
+          </nav>
         </div>
-        <nav className="nav-items">
-          <Link className="nav-item" to="/app">🏠 <span className="label">Home</span></Link>
-          <Link className="nav-item" to="/quiz">📝 <span className="label">Quiz</span></Link>
-          <Link className="nav-item" to="/notifications">🔔 <span className="label">Notifications</span></Link>
-          <Link className="nav-item active" to="/profile">👤 <span className="label">Profile</span></Link>
-          <Link className="nav-item" to="/ai-tutor">🤖 <span className="label">AI Tutor</span></Link>
-          <Link className="nav-item" to="#">🎮 <span className="label">Games</span></Link>
-          <Link className="nav-item" to="/settings">⚙️ <span className="label">Settings</span></Link>
-        </nav>
+        <div className="sidebar-bottom">
+          <Link className="nav-link small" to="#"><FaChartLine className="nav-ico" /><span className="label">AI Insights</span></Link>
+          <div className="ai-buddy-block">
+            <div className="ai-buddy-title">AI Buddy</div>
+            <div className="ai-buddy-desc">Ready to help you learn something new today!</div>
+            <Link className="ai-buddy-chat" to="/ai-tutor">Chat</Link>
+          </div>
+        </div>
       </aside>
 
       <main className="profile-main">
