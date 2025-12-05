@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './OnboardingStep2.css';
 
 export default function OnboardingStep2() {
@@ -74,7 +74,7 @@ export default function OnboardingStep2() {
   return (
     <div className="onboarding-step2-root">
       <header className="step2-header">
-        <div className="logo"><span className="logo-purple">Smart</span><span className="logo-teal">Learn</span></div>
+        <Link to="/" className="logo" style={{ textDecoration: 'none', color: 'inherit' }}><span className="logo-purple">Smart</span><span className="logo-teal">Learn</span></Link>
         <div className="progress-note">You're getting closer</div>
       </header>
 

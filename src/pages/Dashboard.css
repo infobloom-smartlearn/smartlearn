@@ -17,6 +17,13 @@
   min-height: 100vh;
   background: var(--main-bg);
   font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+body.dark-mode .dashboard-root {
+  --main-bg: #0f172a;
+  --card-bg: #1e293b;
+  --sidebar-bg: #1e293b;
 }
 
 .sidebar {
@@ -27,6 +34,11 @@
   justify-content: space-between;
   box-shadow: var(--shadow);
   padding: 0 0 24px 0;
+  transition: background-color 0.3s ease;
+}
+
+body.dark-mode .sidebar {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 .sidebar-top {
   padding: 32px 0 0 0;
@@ -36,6 +48,14 @@
   align-items: center;
   margin-bottom: 32px;
   padding-left: 32px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.logo-block:hover {
+  transform: scale(1.05);
 }
 .logo-circle {
   width: 44px;
@@ -85,8 +105,16 @@
   text-decoration: none;
   padding: 10px 12px;
   border-radius: 10px;
-  transition: background 0.12s ease, transform 0.12s ease;
+  transition: background 0.12s ease, transform 0.12s ease, color 0.3s ease;
   width: 100%;
+}
+
+body.dark-mode .nav-link {
+  color: #cbd5e1;
+}
+
+body.dark-mode .nav-link:hover {
+  background: linear-gradient(90deg, rgba(170,51,240,0.15), rgba(207,125,239,0.15));
 }
 .nav-link:hover { transform: translateX(4px); background: linear-gradient(90deg, rgba(170,51,240,0.06), rgba(207,125,239,0.06)); }
 .nav-link.active {
@@ -160,10 +188,16 @@
   font-weight: 700;
   color: var(--accent-purple);
   margin-bottom: 4px;
+  transition: color 0.3s ease;
 }
 .greeting p {
   font-size: 18px;
   color: #6c4bb6;
+  transition: color 0.3s ease;
+}
+
+body.dark-mode .greeting p {
+  color: #cbd5e1;
 }
 .search-bar {
   display: flex;
@@ -178,6 +212,17 @@
   font-size: 16px;
   background: #fff;
   width: 100%;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .search-bar input {
+  background: #334155;
+  border-color: rgba(255,255,255,0.2);
+  color: #f1f5f9;
+}
+
+body.dark-mode .search-bar input::placeholder {
+  color: #94a3b8;
 }
 .search-bell {
   font-size: 22px;
@@ -239,6 +284,11 @@
   border-radius: 16px;
   box-shadow: var(--shadow);
   padding: 24px 32px;
+  transition: background-color 0.3s ease;
+}
+
+body.dark-mode .continue-section {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 .section-header {
   display: flex;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Onboarding from './pages/Onboarding';
@@ -16,6 +16,8 @@ import Settings from './pages/Settings';
 import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
 import AiTutor from './pages/AiTutor';
+import VoiceAssistant from './pages/VoiceAssistant';
+import AIInsights from './pages/AIInsights';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import TeacherDashboard from './pages/TeacherDashboard';
@@ -42,6 +44,16 @@ function Home() {
 }
 
 function App() {
+  // Initialize dark mode on app load
+  useEffect(() => {
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedDarkMode === 'true') {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, []);
+
   return (
     <Router>
       <Routes>
@@ -60,6 +72,8 @@ function App() {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/ai-tutor" element={<AiTutor />} />
+        <Route path="/voice-assistant" element={<VoiceAssistant />} />
+        <Route path="/ai-insights" element={<AIInsights />} />
         {/* Teacher experience */}
         <Route path="/teacher" element={<TeacherDashboard />} />
         <Route path="/teacher/lessons" element={<TeacherLessons />} />

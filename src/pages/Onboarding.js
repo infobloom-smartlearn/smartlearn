@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Onboarding.css'; // keep existing or create
 
 export default function Onboarding() {
@@ -31,10 +31,10 @@ export default function Onboarding() {
     return (
         <div className="onboarding-screen">
             <header className="onboarding-header">
-                <div className="logo">
+                <Link to="/" className="logo" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <span className="logo-purple">Smart</span>
                     <span className="logo-teal">Learn</span>
-                </div>
+                </Link>
             </header>
 
             <main className="onboarding-body">

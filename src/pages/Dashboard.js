@@ -27,13 +27,13 @@ export default function Dashboard() {
       {/* Sidebar */}
       <aside className="sidebar">
         <div className="sidebar-top">
-          <div className="logo-block">
+          <Link to="/" className="logo-block">
             <div className="logo-circle">
               {/* Replace with SVG icon if available */}
               <FaLightbulb className="logo-icon" />
             </div>
             <span className="logo-text">SmartLearn</span>
-          </div>
+          </Link>
           <nav className="nav-links">
               <Link className="nav-link active" to="/app"><FaHome className="nav-ico" /><span className="label">Home</span></Link>
               <Link className="nav-link" to="/quiz"><FaEdit className="nav-ico" /><span className="label">Quiz</span></Link>
@@ -45,8 +45,8 @@ export default function Dashboard() {
           </nav>
         </div>
         <div className="sidebar-bottom">
-          <Link className="nav-link small" to="#"><FaMicrophone className="nav-ico" /><span className="label">Voice Assistant</span></Link>
-          <Link className="nav-link small" to="#"><FaChartLine className="nav-ico" /><span className="label">AI Insights</span></Link>
+          <Link className="nav-link small" to="/voice-assistant"><FaMicrophone className="nav-ico" /><span className="label">Voice Assistant</span></Link>
+          <Link className="nav-link small" to="/ai-insights"><FaChartLine className="nav-ico" /><span className="label">AI Insights</span></Link>
           <div className="ai-buddy-block">
             <div className="ai-buddy-title">AI Buddy</div>
             <div className="ai-buddy-desc">Ready to help you learn something new today!</div>

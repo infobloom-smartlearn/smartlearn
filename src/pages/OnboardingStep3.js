@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './OnboardingStep3.css';
 
 export default function OnboardingStep3(){
@@ -8,7 +8,7 @@ export default function OnboardingStep3(){
   return (
     <div className="onboarding-step3-root">
       <header className="step3-header">
-        <div className="logo"><span className="logo-purple">Smart</span><span className="logo-teal">Learn</span></div>
+        <Link to="/" className="logo" style={{ textDecoration: 'none', color: 'inherit' }}><span className="logo-purple">Smart</span><span className="logo-teal">Learn</span></Link>
         <div className="progress-note">You're finally here</div>
       </header>
 

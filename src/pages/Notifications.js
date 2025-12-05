@@ -10,6 +10,7 @@ import {
   FaUser, 
   FaRobot, 
   FaCog,
+  FaMicrophone,
   FaChartLine
 } from 'react-icons/fa';
 
@@ -105,7 +106,8 @@ export default function Notifications(){
           </nav>
         </div>
         <div className="sidebar-bottom">
-          <Link className="nav-link small" to="#"><FaChartLine className="nav-ico" /><span className="label">AI Insights</span></Link>
+          <Link className="nav-link" to="/voice-assistant"><FaMicrophone className="nav-ico" /><span className="label">Voice Assistant</span></Link>
+          <Link className="nav-link small" to="/ai-insights"><FaChartLine className="nav-ico" /><span className="label">AI Insights</span></Link>
           <div className="ai-buddy-block">
             <div className="ai-buddy-title">AI Buddy</div>
             <div className="ai-buddy-desc">Ready to help you learn something new today!</div>
