@@ -809,9 +809,16 @@
 }
 
 /* Responsive Design */
+
+/* Large Tablets */
 @media (max-width: 1200px) {
+  .signup-container {
+    padding: 32px 20px;
+  }
+  
   .signup-wrapper {
     gap: 40px;
+    max-width: 1200px;
   }
   
   .signup-card {
@@ -821,12 +828,22 @@
   .signup-info-panel {
     padding: 56px 48px;
   }
+  
+  .info-content h2 {
+    font-size: 36px;
+  }
 }
 
+/* Tablets */
 @media (max-width: 968px) {
+  .signup-container {
+    padding: 24px 20px;
+  }
+  
   .signup-wrapper {
     grid-template-columns: 1fr;
     gap: 32px;
+    max-width: 700px;
   }
 
   .signup-card {
@@ -839,7 +856,7 @@
   }
 
   .user-type-buttons {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
 
@@ -847,11 +864,152 @@
     grid-template-columns: 1fr;
     gap: 20px;
   }
+  
+  .signup-header h1 {
+    font-size: 32px;
+  }
+  
+  .signup-header .logo-text {
+    font-size: 26px;
+  }
 }
 
-@media (max-width: 640px) {
+/* Mobile Devices */
+@media (max-width: 768px) {
   .signup-container {
     padding: 20px 16px;
+    min-height: 100vh;
+  }
+
+  .signup-wrapper {
+    gap: 24px;
+  }
+
+  .signup-card {
+    padding: 36px 32px;
+    gap: 28px;
+    border-radius: 24px;
+  }
+
+  .signup-header {
+    margin-bottom: 4px;
+  }
+  
+  .signup-header .logo-container {
+    padding: 10px 20px;
+    margin-bottom: 24px;
+  }
+
+  .signup-header .logo-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+
+  .signup-header .logo-text {
+    font-size: 24px;
+  }
+
+  .signup-header h1 {
+    font-size: 28px;
+    margin: 0 0 10px 0;
+  }
+
+  .signup-header p {
+    font-size: 15px;
+  }
+
+  .user-type-selector {
+    gap: 12px;
+  }
+
+  .selector-label {
+    font-size: 13px;
+  }
+
+  .user-type-buttons {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .user-type-btn {
+    padding: 16px 12px;
+    gap: 8px;
+  }
+
+  .user-type-btn .icon {
+    font-size: 24px;
+  }
+
+  .user-type-btn .label {
+    font-size: 12px;
+  }
+
+  .signup-form {
+    gap: 20px;
+  }
+
+  .form-group {
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+  }
+
+  .form-group input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 14px 16px;
+  }
+
+  .password-input-group input {
+    padding-right: 44px;
+  }
+
+  .toggle-password-btn {
+    right: 10px;
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .signup-btn {
+    padding: 14px 24px;
+    font-size: 15px;
+    width: 100%;
+  }
+
+  .google-signin-btn {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+
+  .signin-link-btn {
+    padding: 14px 20px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .form-divider {
+    margin: 12px 0;
+    font-size: 12px;
+  }
+
+  .error-message,
+  .success-message {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+
+  .signup-footer {
+    font-size: 11px;
+    margin-top: 12px;
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 640px) {
+  .signup-container {
+    padding: 16px 12px;
   }
 
   .signup-card {
@@ -860,12 +1018,9 @@
     border-radius: 20px;
   }
 
-  .signup-header h1 {
-    font-size: 28px;
-  }
-
-  .signup-header .logo-text {
-    font-size: 24px;
+  .signup-header .logo-container {
+    padding: 8px 16px;
+    margin-bottom: 20px;
   }
 
   .signup-header .logo-icon {
@@ -874,9 +1029,130 @@
     font-size: 20px;
   }
 
+  .signup-header .logo-text {
+    font-size: 22px;
+  }
+
+  .signup-header h1 {
+    font-size: 26px;
+    line-height: 1.2;
+  }
+
+  .signup-header p {
+    font-size: 14px;
+  }
+
+  .user-type-buttons {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .user-type-btn {
+    padding: 18px 16px;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .user-type-btn .icon {
+    font-size: 28px;
+  }
+
+  .user-type-btn .label {
+    font-size: 14px;
+  }
+
   .form-group input {
+    padding: 12px 14px;
     font-size: 16px;
-    padding: 12px 16px;
+  }
+
+  .signup-btn {
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+
+  .google-signin-btn {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+
+  .signin-link-btn {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+
+  .password-requirements {
+    font-size: 11px;
+  }
+
+  .requirements-list {
+    font-size: 11px;
+    gap: 5px;
+  }
+
+  .strength-text {
+    font-size: 11px;
+  }
+
+  .password-match {
+    font-size: 11px;
+  }
+
+  .checkbox-label {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 480px) {
+  .signup-container {
+    padding: 12px 10px;
+  }
+
+  .signup-card {
+    padding: 28px 20px;
+    gap: 20px;
+    border-radius: 16px;
+  }
+
+  .signup-header .logo-container {
+    padding: 6px 14px;
+    margin-bottom: 16px;
+  }
+
+  .signup-header .logo-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .signup-header .logo-text {
+    font-size: 20px;
+  }
+
+  .signup-header h1 {
+    font-size: 24px;
+    margin: 0 0 8px 0;
+  }
+
+  .signup-header p {
+    font-size: 13px;
+  }
+
+  .user-type-selector {
+    gap: 10px;
+  }
+
+  .selector-label {
+    font-size: 12px;
   }
 
   .user-type-btn {
@@ -887,8 +1163,85 @@
     font-size: 24px;
   }
 
-  .signup-btn {
-    padding: 14px 24px;
-    font-size: 15px;
+  .user-type-btn .label {
+    font-size: 13px;
+  }
+
+  .signup-form {
+    gap: 18px;
+  }
+
+  .form-group {
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 11px;
+  }
+
+  .form-group input {
+    padding: 12px 14px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .toggle-password-btn {
+    right: 8px;
+    font-size: 16px;
+  }
+
+  .signup-btn,
+  .google-signin-btn,
+  .signin-link-btn {
+    padding: 12px 18px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+
+  .form-divider {
+    font-size: 11px;
+    margin: 10px 0;
+  }
+
+  .error-message,
+  .success-message {
+    padding: 10px 14px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+  .error-icon,
+  .success-icon {
+    font-size: 16px;
+  }
+
+  .signup-footer {
+    font-size: 10px;
+    margin-top: 10px;
+  }
+
+  .signup-footer .separator {
+    margin: 0 6px;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .signup-container {
+    padding: 16px 20px;
+  }
+
+  .signup-card {
+    padding: 32px 40px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .signup-header h1 {
+    font-size: 26px;
+  }
+
+  .user-type-buttons {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

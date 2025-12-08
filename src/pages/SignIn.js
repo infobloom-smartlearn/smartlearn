@@ -14,6 +14,12 @@ const SignIn = () => {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [pageLoaded, setPageLoaded] = useState(false);
+
+  // Animation on mount
+  useEffect(() => {
+    setPageLoaded(true);
+  }, []);
 
   // Pre-fill email and userType if coming from signup
   useEffect(() => {
@@ -143,7 +149,7 @@ const SignIn = () => {
       <div className="signin-wrapper">
         <div className="signin-card">
           {/* Header */}
-          <div className="signin-header">
+          <div className={`signin-header ${pageLoaded ? 'fade-in-delay-1' : ''}`}>
             <div className="logo-container">
               <div className="logo-icon">
                 <FaLightbulb />
@@ -155,7 +161,7 @@ const SignIn = () => {
           </div>
 
           {/* User Type Selection */}
-          <div className="user-type-selector">
+          <div className={`user-type-selector ${pageLoaded ? 'fade-in-delay-2' : ''}`}>
             <p className="selector-label">I'm signing in as a:</p>
             <div className="user-type-buttons">
               <button
@@ -187,14 +193,14 @@ const SignIn = () => {
 
           {/* Error Message */}
           {error && (
-            <div className="error-message">
+            <div className={`error-message ${pageLoaded ? 'fade-in-delay-3' : ''}`}>
               <HiExclamationCircle className="error-icon" />
               <span>{error}</span>
             </div>
           )}
 
           {/* Sign In Form */}
-          <form onSubmit={handleSignIn} className="signin-form">
+          <form onSubmit={handleSignIn} className={`signin-form ${pageLoaded ? 'fade-in-delay-3' : ''}`}>
             {/* Email Input */}
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
@@ -254,14 +260,14 @@ const SignIn = () => {
           </form>
 
           {/* Divider */}
-          <div className="form-divider">
+          <div className={`form-divider ${pageLoaded ? 'fade-in-delay-4' : ''}`}>
             <span>Or continue with</span>
           </div>
 
           {/* Google Sign In Button */}
           <button
             type="button"
-            className="google-signin-btn"
+            className={`google-signin-btn ${pageLoaded ? 'fade-in-delay-4' : ''}`}
             onClick={handleGoogleButtonClick}
             disabled={loading || googleLoading}
           >
@@ -293,14 +299,14 @@ const SignIn = () => {
           </button>
 
           {/* Divider */}
-          <div className="form-divider">
+          <div className={`form-divider ${pageLoaded ? 'fade-in-delay-5' : ''}`}>
             <span>Don't have an account?</span>
           </div>
 
           {/* Sign Up Link */}
           <button
             type="button"
-            className="signup-btn"
+            className={`signup-btn ${pageLoaded ? 'fade-in-delay-5' : ''}`}
             onClick={handleSignUp}
             disabled={loading || googleLoading}
           >
@@ -308,7 +314,7 @@ const SignIn = () => {
           </button>
 
           {/* Footer Links */}
-          <div className="signin-footer">
+          <div className={`signin-footer ${pageLoaded ? 'fade-in-delay-6' : ''}`}>
             <a href="#terms">Terms of Service</a>
             <span className="separator">•</span>
             <a href="#privacy">Privacy Policy</a>
@@ -316,7 +322,7 @@ const SignIn = () => {
         </div>
 
         {/* Side Information Panel */}
-        <div className="signin-info-panel">
+        <div className={`signin-info-panel ${pageLoaded ? 'slide-in' : ''}`}>
           <div className="info-content">
             <h2>Why SmartLearn?</h2>
             <ul className="features-list">

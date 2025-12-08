@@ -325,28 +325,57 @@
   color: #4a3a6a;
 }
 
+/* Tablet */
+@media (max-width: 1024px) {
+  .features {
+    padding: 80px 2rem 100px;
+  }
+  
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+/* Mobile devices */
 @media (max-width: 768px) {
   .features {
-    padding: 60px 1rem;
+    padding: 60px 1.5rem 80px;
+  }
+
+  .features-header {
+    margin-bottom: 3rem;
   }
 
   .features-title {
     font-size: 2rem;
+    line-height: 1.2;
   }
 
   .features-subtitle {
     font-size: 1rem;
+    padding: 0 1rem;
   }
 
   .features-categories {
     gap: 8px;
     margin-bottom: 2rem;
     padding: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .features-categories::-webkit-scrollbar {
+    display: none;
   }
 
   .category-filter {
     padding: 8px 16px;
     font-size: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .features-grid {
@@ -355,7 +384,7 @@
   }
 
   .feature-card {
-    padding: 2rem;
+    padding: 2rem 1.5rem;
   }
 
   .feature-category-badge {
@@ -363,5 +392,88 @@
     right: 16px;
     font-size: 10px;
     padding: 3px 10px;
+  }
+  
+  .feature-icon {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .feature-icon-svg {
+    font-size: 36px;
+  }
+  
+  .feature-title {
+    font-size: 1.25rem;
+  }
+  
+  .feature-description {
+    font-size: 0.9rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .features {
+    padding: 50px 1rem 60px;
+  }
+  
+  .features-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .features-title {
+    font-size: 1.75rem;
+    padding: 0 0.5rem;
+  }
+
+  .features-subtitle {
+    font-size: 0.95rem;
+    padding: 0;
+  }
+
+  .features-categories {
+    gap: 6px;
+    margin-bottom: 1.5rem;
+  }
+
+  .category-filter {
+    padding: 7px 14px;
+    font-size: 11px;
+  }
+
+  .features-grid {
+    gap: 1.25rem;
+  }
+
+  .feature-card {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .feature-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 1.25rem;
+  }
+  
+  .feature-icon-svg {
+    font-size: 32px;
+  }
+
+  .feature-title {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+  }
+  
+  .feature-description {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .feature-category-badge {
+    top: 12px;
+    right: 12px;
+    font-size: 9px;
+    padding: 2px 8px;
   }
 }
